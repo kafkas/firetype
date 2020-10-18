@@ -16,7 +16,8 @@
     "stripInternal": true,
     "target": "es5",
     "paths": {
-      "@firetype/core": ["core/src"]
+      "@firetype/core": ["core/src"],
+      "@firetype/server": ["server/src"]
     }
   }
 }

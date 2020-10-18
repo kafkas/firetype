@@ -17,5 +17,17 @@ module.exports = {
     sourceType: 'module',
   },
   plugins: ['@typescript-eslint', 'import', 'prettier'],
-  rules: {},
+  rules: {
+    'import/no-unresolved': 'error',
+  },
+  settings: {
+    'import/parsers': {
+      '@typescript-eslint/parser': ['.ts', '.tsx'],
+    },
+    'import/resolver': {
+      typescript: {
+        project: ['packages/*/tsconfig.build.json'],
+      },
+    },
+  },
 };
