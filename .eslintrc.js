@@ -19,6 +19,7 @@ module.exports = {
   plugins: ['@typescript-eslint', 'import', 'prettier'],
   rules: {
     'import/no-unresolved': 'error',
+    '@typescript-eslint/explicit-module-boundary-types': 0,
   },
   settings: {
     'import/parsers': {
