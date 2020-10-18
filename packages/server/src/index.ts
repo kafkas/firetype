@@ -1,4 +1,4 @@
-import { square } from "@firetype/core";
+import { square } from '@firetype/core';
 
 console.log(square(4));
 
