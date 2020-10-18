@@ -1,8 +1,9 @@
 {
   "compilerOptions": {
+    "baseUrl": "./packages",
     "declaration": true,
     "esModuleInterop": true,
-    "module": "ES2015",
+    "module": "commonjs",
     "moduleResolution": "node",
     "noImplicitAny": true,
     "noImplicitReturns": true,
@@ -13,6 +14,9 @@
     "sourceMap": true,
     "strict": true,
     "stripInternal": true,
-    "target": "es5"
+    "target": "es5",
+    "paths": {
+      "@firetype/core": ["core/src"]
+    }
   }
 }
