@@ -1,5 +1,4 @@
-import type { FTCollectionModel } from '../models';
-import type { FTDocumentData } from '../FTDocumentData';
+import type { FTCollectionModel, FTDocumentData } from '@firetype/core';
 
 /**
  * A stricter version of `FirebaseFirestore.FirestoreDataConverter` where

@@ -1,4 +1,4 @@
-import type { FTFirestoreModel } from '../models';
+import type { FTFirestoreModel } from '@firetype/core';
 import type { FTCollectionDescriber } from './FTCollectionDescriber';
 
 /**

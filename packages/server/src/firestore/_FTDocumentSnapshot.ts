@@ -1,4 +1,5 @@
-import type { FTCollectionModel, FTCollectionDescriber } from '@firetype/core';
+import type { FTCollectionModel } from '@firetype/core';
+import type { FTCollectionDescriber } from '../FTCollectionDescriber';
 
 export class FTDocumentSnapshot<CM extends FTCollectionModel> {
   constructor(

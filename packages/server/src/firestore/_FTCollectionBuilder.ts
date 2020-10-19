@@ -1,5 +1,6 @@
 import type * as funcs from 'firebase-functions';
-import type { FTCollectionModel, FTCollectionDescriber } from '@firetype/core';
+import type { FTCollectionModel } from '@firetype/core';
+import type { FTCollectionDescriber } from '../FTCollectionDescriber';
 import type { ObjectLiteralUnion } from '../_utils';
 import type { FTWildcardObject } from '../_FTWildcardObject';
 import FTDocumentBuilder from './_FTDocumentBuilder';
