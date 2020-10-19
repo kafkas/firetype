@@ -1,5 +1,4 @@
-import type { FTFirestoreDescriber, FTCollectionDescriber } from '@firetype/core';
-import { FTFunctions } from '../src';
+import { FTFunctions, FTCollectionDescriber, FTFirestoreDescriber } from '../src';
 
 interface EmailsCollectionModel {
   model: {
