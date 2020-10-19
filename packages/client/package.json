@@ -29,6 +29,12 @@
     "url": "https://github.com/kafkas/firetype/issues"
   },
   "devDependencies": {
+    "@firetype/core": "^0.0.1",
+    "firebase": "^7.24.0",
     "typescript": "^4.0.3"
+  },
+  "peerDependencies": {
+    "@firetype/core": "^0.0.1",
+    "firebase": "^7.24.0"
   }
 }

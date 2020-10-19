@@ -1,1 +1,2 @@
-export type FTDoc = Record<string, unknown>;
+export * from './FTCollectionDescriber';
+export * from './FTFirestoreDescriber';
