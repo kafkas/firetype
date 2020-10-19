@@ -1,3 +1,3 @@
-export * from './FTCollectionDescriber';
-export * from './FTFirestoreDescriber';
 export * from './FTFunctions';
+export type { FTCollectionDescriber } from './FTCollectionDescriber';
+export type { FTFirestoreDescriber } from './FTFirestoreDescriber';

@@ -1,11 +1,8 @@
 import type * as funcs from 'firebase-functions';
 import type { FTCollectionModel } from '@firetype/core';
-import type { FTCollectionDescriber } from '../FTCollectionDescriber';
-import type { FTWildcardObject } from '../_FTWildcardObject';
 import { hasSubcollection } from '../_utils/describers';
-import { FTDocumentSnapshot } from './_FTDocumentSnapshot';
-import { FTQueryDocumentSnapshot } from './_FTQueryDocumentSnapshot';
-import FTCollectionBuilder from './_FTCollectionBuilder';
+import type { FTCollectionDescriber } from '../FTCollectionDescriber';
+import { FTWildcardObject, FTDocumentSnapshot, FTQueryDocumentSnapshot, FTCollectionBuilder } from '.';
 
 type FTEventContext<T extends FTWildcardObject> = funcs.EventContext & {
   params: T;
@@ -32,7 +29,7 @@ type FTWriteChangeHandler<CM extends FTCollectionModel, T extends FTWildcardObje
   context: FTEventContext<T>
 ) => any;
 
-export default class FTDocumentPath<CM extends FTCollectionModel, T extends FTWildcardObject> {
+export class FTDocumentBuilder<CM extends FTCollectionModel, T extends FTWildcardObject> {
   constructor(
     private readonly functions: typeof funcs | funcs.FunctionBuilder,
     private readonly describer: FTCollectionDescriber<CM>,

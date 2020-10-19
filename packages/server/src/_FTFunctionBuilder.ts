@@ -1,9 +1,9 @@
 import type * as functions from 'firebase-functions';
 import type { FTFirestoreModel } from '@firetype/core';
 import type { FTFirestoreDescriber } from './FTFirestoreDescriber';
-import FTFunctionsFirestore from './firestore/FTFunctionsFirestore';
+import { FTFunctionsFirestore } from './_firestore';
 
-export default class FTFunctionBuilder<FM extends FTFirestoreModel> {
+export class FTFunctionBuilder<FM extends FTFirestoreModel> {
   public readonly firestore: FTFunctionsFirestore<FM>;
 
   constructor(public readonly core: functions.FunctionBuilder, private readonly describer: FTFirestoreDescriber<FM>) {

@@ -1,8 +1,8 @@
 import type { FTCollectionModel } from '@firetype/core';
-import type { FTCollectionDescriber } from './FTCollectionDescriber';
-import FTDocument from './FTDocument';
+import type { FTCollectionDescriber } from '../FTCollectionDescriber';
+import { FTDocumentReference } from '.';
 
-export default class FTCollection<CM extends FTCollectionModel> {
+export class FTCollectionReference<CM extends FTCollectionModel> {
   public readonly core: FirebaseFirestore.CollectionReference<CM['model']['processed']>;
 
   constructor(core: FirebaseFirestore.CollectionReference, private readonly describer: FTCollectionDescriber<CM>) {
@@ -10,7 +10,7 @@ export default class FTCollection<CM extends FTCollectionModel> {
   }
 
   public doc(uid: string) {
-    return new FTDocument(this.core.doc(uid), this.describer);
+    return new FTDocumentReference(this.core.doc(uid), this.describer);
   }
 
   /**

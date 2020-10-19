@@ -1,8 +1,8 @@
 import * as functions from 'firebase-functions';
 import type { FTFirestoreModel } from '@firetype/core';
+import { FTFunctionsFirestore } from './_firestore';
 import type { FTFirestoreDescriber } from './FTFirestoreDescriber';
-import FTFunctionsFirestore from './firestore/FTFunctionsFirestore';
-import FTFunctionBuilder from './_FTFunctionBuilder';
+import { FTFunctionBuilder } from './_FTFunctionBuilder';
 
 export class FTFunctions<FM extends FTFirestoreModel> {
   public readonly core: typeof functions;

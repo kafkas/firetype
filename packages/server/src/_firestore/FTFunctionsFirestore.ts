@@ -1,9 +1,9 @@
 import type * as funcs from 'firebase-functions';
 import type { FTFirestoreModel } from '@firetype/core';
 import type { FTFirestoreDescriber } from '../FTFirestoreDescriber';
-import FTCollectionBuilder from './_FTCollectionBuilder';
+import { FTCollectionBuilder } from '.';
 
-export default class FTFunctionsFirestore<FM extends FTFirestoreModel> {
+export class FTFunctionsFirestore<FM extends FTFirestoreModel> {
   constructor(
     private readonly functions: typeof funcs | funcs.FunctionBuilder,
     private readonly describer: FTFirestoreDescriber<FM>
