@@ -4,12 +4,20 @@ import type { FTFirestoreDescriber } from '../FTFirestoreDescriber';
 import { FTCollectionReference } from '.';
 
 export class FTFirestore<FM extends FTFirestoreModel> {
-  public core: typeof firestore;
-  public instance: firestore.Firestore;
+  public readonly core: typeof firestore;
+  private _instance: firestore.Firestore | undefined;
 
   constructor(private readonly describer: FTFirestoreDescriber<FM>, private readonly app?: firebaseApp.App) {
     this.core = firestore;
-    this.instance = firestore(this.app);
+    this._instance = undefined;
+  }
+
+  public get instance() {
+    if (this._instance === undefined) {
+      this._instance = firestore(this.app);
+    }
+
+    return this._instance;
   }
 
   public collection<K extends keyof FM>(key: K) {

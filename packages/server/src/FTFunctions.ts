@@ -6,11 +6,19 @@ import { FTFunctionBuilder } from './_FTFunctionBuilder';
 
 export class FTFunctions<FM extends FTFirestoreModel> {
   public readonly core: typeof functions;
-  public readonly firestore: FTFunctionsFirestore<FM>;
+  private _firestore: FTFunctionsFirestore<FM> | undefined;
 
   constructor(private readonly describer: FTFirestoreDescriber<FM>) {
     this.core = functions;
-    this.firestore = new FTFunctionsFirestore(this.core, this.describer);
+    this._firestore = undefined;
+  }
+
+  public get firestore() {
+    if (this._firestore === undefined) {
+      this._firestore = new FTFunctionsFirestore(this.core, this.describer);
+    }
+
+    return this._firestore;
   }
 
   public runWith(opts: functions.RuntimeOptions) {
