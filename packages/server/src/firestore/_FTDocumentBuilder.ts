@@ -1,12 +1,11 @@
 import type * as funcs from 'firebase-functions';
 import type { FTCollectionModel } from '@firetype/core';
 import type { FTCollectionDescriber } from '../FTCollectionDescriber';
+import type { FTWildcardObject } from '../_FTWildcardObject';
+import { hasSubcollection } from '../_utils/describers';
 import { FTDocumentSnapshot } from './_FTDocumentSnapshot';
 import { FTQueryDocumentSnapshot } from './_FTQueryDocumentSnapshot';
-import type { FTWildcardObject } from '../_FTWildcardObject';
 import FTCollectionBuilder from './_FTCollectionBuilder';
-
-/* eslint-disable @typescript-eslint/no-explicit-any */
 
 type FTEventContext<T extends FTWildcardObject> = funcs.EventContext & {
   params: T;
@@ -41,10 +40,13 @@ export default class FTDocumentPath<CM extends FTCollectionModel, T extends FTWi
   ) {}
 
   public collection<K extends keyof CM['sub']>(key: K) {
+    if (!hasSubcollection(this.describer)) {
+      throw new Error('Subcollection does not exist according to the describer.');
+    }
+
     return new FTCollectionBuilder<NonNullable<CM['sub']>[K], T>(
       this.functions,
-      /* eslint-disable-next-line */
-      (<any>this.describer).sub[key as string], // FIXME: Remove `any` assertion
+      this.describer.sub[key],
       this.nextPath(key as string)
     );
   }

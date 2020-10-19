@@ -62,3 +62,13 @@ const onUpdate = Functions.firestore
 
     snap.after.core.data();
   });
+
+const onWrite = Functions.firestore
+  .collection('emails')
+  .genericDoc('emailId')
+  .onWrite((snap, context) => {
+    const { emailId } = context.params;
+    const email = snap.after.data();
+
+    snap.after.core.data();
+  });

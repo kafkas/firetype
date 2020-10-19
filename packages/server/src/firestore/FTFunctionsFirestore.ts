@@ -10,7 +10,6 @@ export default class FTFunctionsFirestore<FM extends FTFirestoreModel> {
   ) {}
 
   public collection<K extends keyof FM>(key: K) {
-    /* eslint-disable-next-line */
     return new FTCollectionBuilder<FM[K], {}>(this.functions, this.describer[key], <string>key);
   }
 }
