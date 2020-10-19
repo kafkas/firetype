@@ -41,10 +41,6 @@ export default class FTDocumentPath<CM extends FTCollectionModel, T extends FTWi
   ) {}
 
   public collection<K extends keyof CM['sub']>(key: K) {
-    if (!Object.prototype.hasOwnProperty.call(this.describer, 'sub')) {
-      throw new Error('Subcollection does not exist according to the data model.');
-    }
-
     return new FTCollectionBuilder<NonNullable<CM['sub']>[K], T>(
       this.functions,
       /* eslint-disable-next-line */

@@ -6,7 +6,7 @@ import type { FTCollectionModel, FTDocumentData } from '@firetype/core';
  */
 interface ModelConverter<RM extends FTDocumentData, M> {
   toFirestore: (modelObject: M) => RM;
-  fromFirestore: (docData: RM | undefined) => M;
+  fromFirestore: (snapshot: FirebaseFirestore.QueryDocumentSnapshot<RM>) => M;
 }
 
 /**

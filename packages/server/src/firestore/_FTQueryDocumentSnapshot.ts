@@ -7,7 +7,10 @@ export class FTQueryDocumentSnapshot<CM extends FTCollectionModel> {
     private readonly describer: FTCollectionDescriber<CM>
   ) {}
 
+  /**
+   * Uses the converter in the describer to return the document data as a model object.
+   */
   public data() {
-    return this.describer.converter.fromFirestore(this.core.data());
+    return this.describer.converter.fromFirestore(this.core);
   }
 }
