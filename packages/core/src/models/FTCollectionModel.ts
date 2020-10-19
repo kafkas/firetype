@@ -1,7 +1,4 @@
-/**
- * Represents a Firestore document in its raw format.
- */
-export type FirestoreDocumentData = Record<string, unknown>;
+import type { FTDocumentData } from '../FTDocumentData';
 
 /**
  * Represents the data model for a specific collection and its subcollections.
@@ -20,17 +17,10 @@ export type FirestoreDocumentData = Record<string, unknown>;
  */
 export interface FTCollectionModel {
   model: {
-    raw: FirestoreDocumentData;
+    raw: FTDocumentData;
     processed: unknown;
   };
   sub?: {
     [collectionKey: string]: FTCollectionModel;
   };
-}
-
-/**
- * Represents the data model for the entire Firestore database.
- */
-export interface FTFirestoreModel {
-  [collectionKey: string]: FTCollectionModel;
 }

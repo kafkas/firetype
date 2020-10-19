@@ -1,0 +1,15 @@
+import type * as funcs from 'firebase-functions';
+import type { FTFirestoreModel, FTFirestoreDescriber } from '@firetype/core';
+import FTCollectionBuilder from './_FTCollectionBuilder';
+
+export default class FTFunctionsFirestore<FM extends FTFirestoreModel> {
+  constructor(
+    private readonly functions: typeof funcs | funcs.FunctionBuilder,
+    private readonly describer: FTFirestoreDescriber<FM>
+  ) {}
+
+  public collection<K extends keyof FM>(key: K) {
+    /* eslint-disable-next-line */
+    return new FTCollectionBuilder<FM[K], {}>(this.functions, this.describer[key], <string>key);
+  }
+}
