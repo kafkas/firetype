@@ -25,9 +25,9 @@ export abstract class FTCollectionReferenceCore<E extends FTEnvironment, CM exte
       : O extends 'in'
       ? CM['model']['raw'][F][]
       : CM['model']['raw'][F]
-  ): E extends 'client'
-    ? firestoreClient.Query<CM['model']['processed']>
-    : FirebaseFirestore.Query<CM['model']['processed']> {
-    return this.core.where(<string>field, opStr, value);
+  ) {
+    return this.core.where(<string>field, opStr, value) as E extends 'client'
+      ? firestoreClient.Query<CM['model']['processed']>
+      : FirebaseFirestore.Query<CM['model']['processed']>;
   }
 }
