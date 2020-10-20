@@ -1,0 +1,9 @@
+{
+  "extends": "../../../tsconfig.build.json",
+  "compilerOptions": {
+    "composite": true,
+    "outDir": "../lib/esm",
+    "rootDir": "."
+  },
+  "references": [{ "path": "../../core/src/tsconfig.build.json" }]
+}

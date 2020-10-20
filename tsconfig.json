@@ -1,20 +1,7 @@
 {
+  "extends": "./tsconfig.build.json",
   "compilerOptions": {
     "baseUrl": "./packages",
-    "declaration": true,
-    "esModuleInterop": true,
-    "module": "ES2015",
-    "moduleResolution": "node",
-    "noImplicitAny": true,
-    "noImplicitReturns": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "pretty": true,
-    "removeComments": false,
-    "sourceMap": true,
-    "strict": true,
-    "stripInternal": true,
-    "target": "es5",
     "paths": {
       "@firetype/client": ["client/src"],
       "@firetype/core": ["core/src"],
