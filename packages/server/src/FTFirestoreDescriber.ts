@@ -27,7 +27,8 @@ import type { FTCollectionDescriber } from './FTCollectionDescriber';
  *        from: email.from,
  *        to: email.to
  *      }),
- *      fromFirestore: (emailRaw) => {
+ *      fromFirestore: (snapshot) => {
+ *        const emailRaw = snapshot.data();
  *        // emailRaw is an EmailDoc object so email.to and email.from are well-typed.
  *        return new Email(emailRaw.from, emailRaw.to);
  *      },

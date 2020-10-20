@@ -29,7 +29,10 @@ interface FirestoreModel {
 const emailsDescriber: FTCollectionDescriber<EmailsCollectionModel> = {
   converter: {
     toFirestore: email => email.raw,
-    fromFirestore: docData => new Email(docData),
+    fromFirestore: snapshot => {
+      const emailRaw = snapshot.data();
+      return new Email(emailRaw);
+    },
   },
   readonlyFields: {
     sentAt: true,
