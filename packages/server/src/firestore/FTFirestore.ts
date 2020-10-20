@@ -1,23 +1,14 @@
 import { firestore, app as firebaseApp } from 'firebase-admin';
-import type { FTFirestoreModel } from '@firetype/core';
+import { FTFirestoreCore, FTFirestoreModel } from '@firetype/core';
 import type { FTFirestoreDescriber } from '../FTFirestoreDescriber';
 import { FTCollectionReference } from '.';
 
-export class FTFirestore<FM extends FTFirestoreModel> {
+export class FTFirestore<FM extends FTFirestoreModel> extends FTFirestoreCore<'server', FM> {
   public readonly core: typeof firestore;
-  private _instance: firestore.Firestore | undefined;
 
-  constructor(private readonly describer: FTFirestoreDescriber<FM>, private readonly app?: firebaseApp.App) {
+  constructor(private readonly describer: FTFirestoreDescriber<FM>, app?: firebaseApp.App) {
+    super(app);
     this.core = firestore;
-    this._instance = undefined;
-  }
-
-  public get instance() {
-    if (this._instance === undefined) {
-      this._instance = firestore(this.app);
-    }
-
-    return this._instance;
   }
 
   public collection<K extends keyof FM>(key: K) {

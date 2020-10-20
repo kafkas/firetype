@@ -44,5 +44,6 @@ const describer: FTFirestoreDescriber<FirestoreModel> = {
 };
 
 const Firestore = new FTFirestore<FirestoreModel>(describer);
+
 const email = 'anarkafkas@gmail.com';
 const anarEmailDocRef = Firestore.collection('emails').doc(email);

@@ -1,4 +1,4 @@
-import { FTFunctions, FTCollectionDescriber, FTFirestoreDescriber } from '../src';
+import { FTFunctions, FTFirestore, FTCollectionDescriber, FTFirestoreDescriber } from '../src';
 
 interface EmailsCollectionModel {
   model: {
@@ -45,6 +45,7 @@ const describer: FTFirestoreDescriber<FirestoreModel> = {
 };
 
 const Functions = new FTFunctions<FirestoreModel>(describer);
+const Firestore = new FTFirestore<FirestoreModel>(describer);
 
 const onCreate = Functions.runWith({ memory: '256MB' })
   .firestore.collection('emails')
