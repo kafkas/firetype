@@ -1,5 +1,5 @@
-import type firebaseAdmin from 'firebase-admin';
-import type firebaseClient from 'firebase';
+import type { firestore as firestoreAdmin } from 'firebase-admin';
+import type { firestore as firestoreClient } from 'firebase';
 import type { FTCollectionModel, FTEnvironment } from '..';
 
 /**
@@ -10,10 +10,10 @@ interface ModelConverter<E extends FTEnvironment, CM extends FTCollectionModel> 
   toFirestore: (modelObject: CM['model']['processed']) => CM['model']['raw'];
   fromFirestore: E extends 'client'
     ? (
-        snapshot: firebaseClient.firestore.QueryDocumentSnapshot<CM['model']['raw']>,
-        options: firebase.firestore.SnapshotOptions
+        snapshot: firestoreClient.QueryDocumentSnapshot<CM['model']['raw']>,
+        options: firestoreClient.SnapshotOptions
       ) => CM['model']['processed']
-    : (snapshot: firebaseAdmin.firestore.QueryDocumentSnapshot<CM['model']['raw']>) => CM['model']['processed'];
+    : (snapshot: firestoreAdmin.QueryDocumentSnapshot<CM['model']['raw']>) => CM['model']['processed'];
 }
 
 export interface FTCollectionDescriberCoreWithoutSubcollection<E extends FTEnvironment, CM extends FTCollectionModel> {

@@ -1,12 +1,12 @@
-import type firebaseAdmin from 'firebase-admin';
-import type firebaseClient from 'firebase';
+import type { firestore as firestoreAdmin } from 'firebase-admin';
+import type { firestore as firestoreClient } from 'firebase';
 import type { FTCollectionModel, FTEnvironment } from '..';
 import type { FTCollectionReferenceCore } from '.';
 
 export abstract class FTDocumentReferenceCore<E extends FTEnvironment, CM extends FTCollectionModel> {
   public abstract readonly core: E extends 'client'
-    ? firebaseClient.firestore.DocumentReference<CM['model']['processed']>
-    : firebaseAdmin.firestore.DocumentReference<CM['model']['processed']>;
+    ? firestoreClient.DocumentReference<CM['model']['processed']>
+    : firestoreAdmin.DocumentReference<CM['model']['processed']>;
 
   public abstract collection<K extends keyof CM['sub']>(
     key: K

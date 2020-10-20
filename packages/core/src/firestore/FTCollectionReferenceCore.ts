@@ -1,11 +1,11 @@
-import type firebaseAdmin from 'firebase-admin';
-import type firebaseClient from 'firebase';
+import type { firestore as firestoreAdmin } from 'firebase-admin';
+import type { firestore as firestoreClient } from 'firebase';
 import type { FTCollectionModel, FTEnvironment } from '..';
 
 export abstract class FTCollectionReferenceCore<E extends FTEnvironment, CM extends FTCollectionModel> {
   public abstract readonly core: E extends 'client'
-    ? firebaseClient.firestore.CollectionReference<CM['model']['processed']>
-    : firebaseAdmin.firestore.CollectionReference<CM['model']['processed']>;
+    ? firestoreClient.CollectionReference<CM['model']['processed']>
+    : firestoreAdmin.CollectionReference<CM['model']['processed']>;
 
   /**
    * A strictly typed version of the `where` query. Use this for simple queries where you
@@ -14,7 +14,7 @@ export abstract class FTCollectionReferenceCore<E extends FTEnvironment, CM exte
    */
   public where<
     F extends keyof CM['model']['raw'],
-    O extends E extends 'client' ? firebaseClient.firestore.WhereFilterOp : FirebaseFirestore.WhereFilterOp
+    O extends E extends 'client' ? firestoreClient.WhereFilterOp : FirebaseFirestore.WhereFilterOp
   >(
     field: F,
     opStr: O,
