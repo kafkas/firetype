@@ -1,33 +1,20 @@
-import type { FTCollectionModel, FTDocumentData } from '@firetype/core';
-
-/**
- * A stricter version of `FirebaseFirestore.FirestoreDataConverter` where
- * `RM` represents the raw model and `M` represents the main model.
- */
-interface ModelConverter<RM extends FTDocumentData, M> {
-  toFirestore: (modelObject: M) => RM;
-  fromFirestore: (
-    snapshot: firebase.firestore.QueryDocumentSnapshot<RM>,
-    options: firebase.firestore.SnapshotOptions
-  ) => M;
-}
+import type {
+  FTCollectionModel,
+  FTCollectionDescriberCore,
+  FTCollectionDescriberWithSubcollectionCore,
+  FTCollectionDescriberWithoutSubcollectionCore,
+} from '@firetype/core';
 
 /**
  * Represents the shape of a describer for a specific collection. A collection describer contains details
  * such as model converter, read-only fields and subcollection describers.
  */
-export type FTCollectionDescriber<CM extends FTCollectionModel> = 'sub' extends keyof CM
-  ? FTCollectionDescriberWithSubcollection<CM>
-  : FTCollectionDescriberWithoutSubcollection<CM>;
+export type FTCollectionDescriber<CM extends FTCollectionModel> = FTCollectionDescriberCore<'client', CM>;
 
-export interface FTCollectionDescriberWithoutSubcollection<CM extends FTCollectionModel> {
-  converter: ModelConverter<CM['model']['raw'], CM['model']['processed']>;
-  readonlyFields?: Record<keyof CM['model']['raw'], true>;
-}
+export type FTCollectionDescriberWithSubcollection<
+  CM extends FTCollectionModel
+> = FTCollectionDescriberWithSubcollectionCore<'client', CM>;
 
-export interface FTCollectionDescriberWithSubcollection<CM extends FTCollectionModel>
-  extends FTCollectionDescriberWithoutSubcollection<CM> {
-  sub: {
-    [K in keyof NonNullable<CM['sub']>]: FTCollectionDescriber<NonNullable<CM['sub']>[K]>;
-  };
-}
+export type FTCollectionDescriberWithoutSubcollection<
+  CM extends FTCollectionModel
+> = FTCollectionDescriberWithoutSubcollectionCore<'client', CM>;
