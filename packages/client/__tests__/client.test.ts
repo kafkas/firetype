@@ -45,6 +45,8 @@ const describer: FTFirestoreDescriber<FirestoreModel> = {
 
 const Firestore = new FTFirestore<FirestoreModel>(describer);
 
+const emailsQuery = Firestore.collection('emails').where('sentAt', '<=', new Date());
+
 const email = 'anarkafkas@gmail.com';
 const emailsCollection = Firestore.collection('emails');
 const anarEmailDocRef = emailsCollection.doc(email);
