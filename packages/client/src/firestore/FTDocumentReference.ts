@@ -1,13 +1,15 @@
-import type { FTCollectionModel } from '@firetype/core';
+import { FTDocumentReferenceCore, FTCollectionModel } from '@firetype/core';
 import { hasSubcollection } from '../_utils/describers';
 import type { FTCollectionDescriber } from '../FTCollectionDescriber';
 import { FTCollectionReference } from '.';
 
-export class FTDocumentReference<CM extends FTCollectionModel> {
+export class FTDocumentReference<CM extends FTCollectionModel> extends FTDocumentReferenceCore<'client', CM> {
   constructor(
     public readonly core: firebase.firestore.DocumentReference<CM['model']['processed']>,
     private readonly describer: FTCollectionDescriber<CM>
-  ) {}
+  ) {
+    super();
+  }
 
   public collection<K extends keyof CM['sub']>(key: K) {
     if (!hasSubcollection(this.describer)) {

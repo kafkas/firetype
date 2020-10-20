@@ -2,7 +2,7 @@ import type firebaseAdmin from 'firebase-admin';
 import type firebaseClient from 'firebase';
 import type { FTCollectionModel, FTEnvironment } from '..';
 
-export abstract class FTCollectionReference<E extends FTEnvironment, CM extends FTCollectionModel> {
+export abstract class FTCollectionReferenceCore<E extends FTEnvironment, CM extends FTCollectionModel> {
   public abstract readonly core: E extends 'client'
     ? firebaseClient.firestore.CollectionReference<CM['model']['processed']>
     : firebaseAdmin.firestore.CollectionReference<CM['model']['processed']>;

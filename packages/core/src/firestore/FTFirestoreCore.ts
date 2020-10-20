@@ -1,7 +1,7 @@
 import type firebaseAdmin from 'firebase-admin';
 import type firebaseClient from 'firebase';
 import type { FTFirestoreModel, FTEnvironment } from '..';
-import type { FTCollectionReference } from '.';
+import type { FTCollectionReferenceCore } from '.';
 
 export abstract class FTFirestoreCore<E extends FTEnvironment, FM extends FTFirestoreModel> {
   public abstract readonly core: E extends 'client' ? typeof firebaseClient.firestore : typeof firebaseAdmin.firestore;
@@ -22,5 +22,5 @@ export abstract class FTFirestoreCore<E extends FTEnvironment, FM extends FTFire
     return this._instance;
   }
 
-  public abstract collection<K extends keyof FM>(key: K): FTCollectionReference<E, FM[K]>;
+  public abstract collection<K extends keyof FM>(key: K): FTCollectionReferenceCore<E, FM[K]>;
 }

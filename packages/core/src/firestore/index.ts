@@ -1,3 +1,3 @@
-export { FTCollectionReference } from './FTCollectionReference';
-export { FTDocumentReference } from './FTDocumentReference';
+export { FTCollectionReferenceCore } from './FTCollectionReferenceCore';
+export { FTDocumentReferenceCore } from './FTDocumentReferenceCore';
 export { FTFirestoreCore } from './FTFirestoreCore';
