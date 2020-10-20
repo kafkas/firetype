@@ -1,6 +1,6 @@
 import type firebaseAdmin from 'firebase-admin';
 import type firebaseClient from 'firebase';
-import type { FTCollectionModel, FTEnvironment } from '.';
+import type { FTCollectionModel, FTEnvironment } from '..';
 
 /**
  * A stricter version of `FirebaseFirestore.FirestoreDataConverter` where
@@ -16,18 +16,7 @@ interface ModelConverter<E extends FTEnvironment, CM extends FTCollectionModel> 
     : (snapshot: firebaseAdmin.firestore.QueryDocumentSnapshot<CM['model']['raw']>) => CM['model']['processed'];
 }
 
-export type FTCollectionDescriberCore<E extends FTEnvironment, CM extends FTCollectionModel> = 'sub' extends keyof CM
-  ? FTCollectionDescriberWithoutSubcollectionCore<E, CM>
-  : FTCollectionDescriberWithoutSubcollectionCore<E, CM>;
-
-export interface FTCollectionDescriberWithoutSubcollectionCore<E extends FTEnvironment, CM extends FTCollectionModel> {
+export interface FTCollectionDescriberCoreWithoutSubcollection<E extends FTEnvironment, CM extends FTCollectionModel> {
   converter: ModelConverter<E, CM>;
   readonlyFields?: Record<keyof CM['model']['raw'], true>;
-}
-
-export interface FTCollectionDescriberWithSubcollectionCore<E extends FTEnvironment, CM extends FTCollectionModel>
-  extends FTCollectionDescriberWithoutSubcollectionCore<E, CM> {
-  sub: {
-    [K in keyof NonNullable<CM['sub']>]: FTCollectionDescriberCore<E, NonNullable<CM['sub']>[K]>;
-  };
 }

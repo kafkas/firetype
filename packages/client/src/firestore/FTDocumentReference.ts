@@ -1,5 +1,4 @@
-import { FTDocumentReferenceCore, FTCollectionModel } from '@firetype/core';
-import { hasSubcollection } from '../_utils/describers';
+import { FTDocumentReferenceCore, FTCollectionModel, DescriberUtils } from '@firetype/core';
 import type { FTCollectionDescriber } from '../FTCollectionDescriber';
 import { FTCollectionReference } from '.';
 
@@ -12,7 +11,7 @@ export class FTDocumentReference<CM extends FTCollectionModel> extends FTDocumen
   }
 
   public collection<K extends keyof CM['sub']>(key: K) {
-    if (!hasSubcollection(this.describer)) {
+    if (!DescriberUtils.hasSubcollection(this.describer)) {
       throw new Error('Subcollection does not exist according to the describer.');
     }
 

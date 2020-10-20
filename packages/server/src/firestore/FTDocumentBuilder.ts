@@ -1,6 +1,5 @@
 import type * as funcs from 'firebase-functions';
-import type { FTCollectionModel } from '@firetype/core';
-import { hasSubcollection } from '../_utils/describers';
+import { FTCollectionModel, DescriberUtils } from '@firetype/core';
 import type { FTCollectionDescriber } from '../FTCollectionDescriber';
 import { FTWildcardObject, FTDocumentSnapshot, FTQueryDocumentSnapshot, FTCollectionBuilder } from '.';
 
@@ -37,7 +36,7 @@ export class FTDocumentBuilder<CM extends FTCollectionModel, T extends FTWildcar
   ) {}
 
   public collection<K extends keyof CM['sub']>(key: K) {
-    if (!hasSubcollection(this.describer)) {
+    if (!DescriberUtils.hasSubcollection(this.describer)) {
       throw new Error('Subcollection does not exist according to the describer.');
     }
 
