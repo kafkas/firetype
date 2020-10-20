@@ -1,4 +1,4 @@
-import { FTCollectionDescriber, FTFirestoreDescriber } from '../src';
+import { FTCollectionDescriber, FTFirestoreDescriber, FTFirestore } from '../src';
 
 interface EmailsCollectionModel {
   model: {
@@ -43,24 +43,6 @@ const describer: FTFirestoreDescriber<FirestoreModel> = {
   emails: emailsDescriber,
 };
 
-const Functions = new FTFunctions<FirestoreModel>(describer);
-
-const onCreate = Functions.runWith({ memory: '256MB' })
-  .firestore.collection('emails')
-  .genericDoc('emailId')
-  .onCreate((snap, context) => {
-    const { emailId } = context.params;
-    const email = snap.data();
-
-    snap.core.data();
-  });
-
-const onUpdate = Functions.firestore
-  .collection('emails')
-  .genericDoc('emailId')
-  .onUpdate((snap, context) => {
-    const { emailId } = context.params;
-    const email = snap.after.data();
-
-    snap.after.core.data();
-  });
+const Firestore = new FTFirestore<FirestoreModel>(describer);
+const email = 'anarkafkas@gmail.com';
+const anarEmailDocRef = Firestore.collection('emails').doc(email);

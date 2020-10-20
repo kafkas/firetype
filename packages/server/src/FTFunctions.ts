@@ -1,6 +1,6 @@
 import * as functions from 'firebase-functions';
 import type { FTFirestoreModel } from '@firetype/core';
-import { FTFunctionsFirestore } from './_firestore';
+import { FTFunctionsFirestore } from './firestore';
 import type { FTFirestoreDescriber } from './FTFirestoreDescriber';
 import { FTFunctionBuilder } from './_FTFunctionBuilder';
 
