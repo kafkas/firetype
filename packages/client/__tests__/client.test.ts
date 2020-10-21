@@ -32,7 +32,12 @@ interface FirestoreModel {
 
 const emailsDescriber: FTCollectionDescriber<EmailsCollectionModel> = {
   converter: {
-    toFirestore: email => email.raw,
+    toFirestore: email => {
+      return {
+        from: email.raw.from,
+        to: email.raw.to,
+      };
+    },
     fromFirestore: (snapshot, options) => {
       return new Email(snapshot.data(options));
     },
