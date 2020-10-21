@@ -1,4 +1,4 @@
-import { FTCollectionDescriber, FTFirestoreDescriber, FTFirestore } from '../src';
+import { FTCollectionDescriber, FTFirestoreDescriber, FTFirestore, FTFieldValue } from '../src';
 
 interface EmailsCollectionModel {
   model: {
@@ -14,6 +14,7 @@ interface EmailsCollectionModel {
 interface EmailDoc {
   from: string;
   to: string;
+  metadata?: string;
   sentAt: Date;
   receivedAt: Date;
 }
