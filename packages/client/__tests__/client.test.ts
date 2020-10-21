@@ -5,6 +5,10 @@ interface EmailsCollectionModel {
     raw: EmailDoc;
     processed: Email;
   };
+  readonlyFields: {
+    sentAt: true;
+    receivedAt: true;
+  };
 }
 
 interface EmailDoc {
@@ -33,10 +37,6 @@ const emailsDescriber: FTCollectionDescriber<EmailsCollectionModel> = {
       return new Email(snapshot.data(options));
     },
   },
-  readonlyFields: {
-    sentAt: true,
-    receivedAt: true,
-  },
 };
 
 const describer: FTFirestoreDescriber<FirestoreModel> = {
@@ -47,6 +47,12 @@ const Firestore = new FTFirestore<FirestoreModel>(describer);
 
 const emailsQuery = Firestore.collection('emails').where('sentAt', '<=', new Date());
 
+emailsQuery.get();
+
 const email = 'anarkafkas@gmail.com';
 const emailsCollection = Firestore.collection('emails');
 const anarEmailDocRef = emailsCollection.doc(email);
+
+anarEmailDocRef.update({
+  from: '',
+});

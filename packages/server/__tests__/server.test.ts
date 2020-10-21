@@ -34,10 +34,6 @@ const emailsDescriber: FTCollectionDescriber<EmailsCollectionModel> = {
       return new Email(emailRaw);
     },
   },
-  readonlyFields: {
-    sentAt: true,
-    receivedAt: true,
-  },
 };
 
 const describer: FTFirestoreDescriber<FirestoreModel> = {

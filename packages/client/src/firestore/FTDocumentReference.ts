@@ -1,4 +1,4 @@
-import { FTDocumentReferenceCore, FTCollectionModel, DescriberUtils } from '@firetype/core';
+import { FTDocumentReferenceCore, FTCollectionModel, DescriberUtils, EditableFields } from '@firetype/core';
 import type { FTCollectionDescriber } from '../FTCollectionDescriber';
 import { FTCollectionReference } from '.';
 
@@ -21,7 +21,11 @@ export class FTDocumentReference<CM extends FTCollectionModel> extends FTDocumen
     );
   }
 
-  public update(data: Partial<CM['model']['raw']>) {
+  /**
+   * @param data - An object containing editable fields with their new values. The keys that you
+   * have marked as read-only in the collection model are not accepted.
+   */
+  public update(data: Partial<EditableFields<CM>>) {
     return this.core.update(data);
   }
 }

@@ -20,6 +20,9 @@ export interface FTCollectionModel {
     raw: FTDocumentData;
     processed: unknown;
   };
+  readonlyFields?: {
+    [field: string]: true;
+  };
   sub?: {
     [collectionKey: string]: FTCollectionModel;
   };

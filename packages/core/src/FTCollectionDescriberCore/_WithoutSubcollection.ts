@@ -18,5 +18,4 @@ interface ModelConverter<E extends FTEnvironment, CM extends FTCollectionModel> 
 
 export interface FTCollectionDescriberCoreWithoutSubcollection<E extends FTEnvironment, CM extends FTCollectionModel> {
   converter: ModelConverter<E, CM>;
-  readonlyFields?: Record<keyof CM['model']['raw'], true>;
 }

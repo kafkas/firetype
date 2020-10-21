@@ -12,7 +12,5 @@ export abstract class FTDocumentReferenceCore<E extends FTEnvironment, CM extend
     key: K
   ): FTCollectionReferenceCore<E, NonNullable<CM['sub']>[K]>;
 
-  public update(data: Partial<CM['model']['raw']>) {
-    return this.core.update(data);
-  }
+  public abstract update(data: unknown): Promise<E extends 'client' ? void : firestoreAdmin.WriteResult>;
 }
