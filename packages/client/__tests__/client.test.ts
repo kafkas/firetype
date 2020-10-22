@@ -35,6 +35,7 @@ interface EmailDoc {
   timestamp?: number;
   sentAt?: firestore.Timestamp;
   receivedAt: firestore.Timestamp;
+  createdAt: firestore.Timestamp;
 }
 
 class Email {
@@ -52,9 +53,7 @@ interface FirestoreModel {
 const emailsDescriber: FTCollectionDescriber<EmailsCollectionModel> = {
   converter: {
     toFirestore: email => {
-      return {
-        tags: FTFieldValue.arrayRemove(),
-      };
+      return {};
     },
     fromFirestore: (snapshot, options) => {
       return new Email(snapshot.data(options));

@@ -28,9 +28,14 @@ type FirestoreDocumentReference<E extends FTEnvironment, T> = E extends 'client'
  * Derives the shape of the raw object that can be used in FTDocumentReference.update() and
  * FTDocumentReference.set() methods.
  */
-export type LegalOutgoingData<E extends FTEnvironment, CM extends FTCollectionModel> = {
-  [K in E extends 'client' ? FTModel.EditableFields<CM> : FTModel.Fields<CM>]: LegalValue<E, FTModel.Raw<CM>[K]>;
-};
+
+export type LegalOutgoingData<E extends FTEnvironment, CM extends FTCollectionModel> = E extends 'client'
+  ? {
+      [K in FTModel.EditableFields<CM>]: LegalValue<E, FTModel.Raw<CM>[K]>;
+    }
+  : {
+      [K in FTModel.Fields<CM>]: LegalValue<E, FTModel.Raw<CM>[K]>;
+    };
 
 type LegalValue<E extends FTEnvironment, V> = LegalValue_1<E, V>;
 
