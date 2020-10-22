@@ -31,7 +31,7 @@ type FirestoreDocumentReference<E extends FTEnvironment, T> = E extends 'client'
 
 export type LegalOutgoingData<E extends FTEnvironment, CM extends FTCollectionModel> = E extends 'client'
   ? {
-      [K in FTModel.EditableFields<CM>]: LegalValue<E, FTModel.Raw<CM>[K]>;
+      [K in keyof FTModel.EditableSubtype<CM>]: LegalValue<E, FTModel.Raw<CM>[K]>;
     }
   : {
       [K in FTModel.Fields<CM>]: LegalValue<E, FTModel.Raw<CM>[K]>;

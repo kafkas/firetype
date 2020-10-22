@@ -1,3 +1,5 @@
+import type { FTModel } from '@firetype/core';
+
 import type { firestore } from 'firebase';
 import { FTCollectionDescriber, FTFirestoreDescriber, FTFirestore, FTFieldValue } from '../src';
 
@@ -7,7 +9,9 @@ interface EmailsCollectionModel {
     processed: Email;
   };
   readonlyFields: {
+    to: true;
     createdAt: true;
+    from: true;
   };
 }
 
@@ -77,6 +81,4 @@ const anarEmailDocRef = emailsCollection.doc(email);
 
 anarEmailDocRef.update({
   metadata: FTFieldValue.delete(),
-
-  nestedField: {},
 });

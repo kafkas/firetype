@@ -69,6 +69,12 @@ const describer: FTFirestoreDescriber<FirestoreModel> = {
 const Functions = new FTFunctions<FirestoreModel>(describer);
 const Firestore = new FTFirestore<FirestoreModel>(describer);
 
+const email = 'anarkafkas@gmail.com';
+const emailsCollection = Firestore.collection('emails');
+const anarEmailDocRef = emailsCollection.doc(email);
+
+anarEmailDocRef.update({});
+
 const onCreate = Functions.runWith({ memory: '256MB' })
   .firestore.collection('emails')
   .genericDoc('emailId')
