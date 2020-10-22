@@ -1,7 +1,9 @@
-import type { FTCollectionModel } from '..';
-import type { FTCollectionDescriberCoreWithSubcollection } from '../FTCollectionDescriberCore/_WithSubcollection';
-import type { FTCollectionDescriberCoreWithoutSubcollection } from '../FTCollectionDescriberCore/_WithoutSubcollection';
-import { FTEnvironment } from '../FTEnvironment';
+import type {
+  FTEnvironment,
+  FTCollectionModel,
+  FTCollectionDescriberCoreWithSubcollection,
+  FTCollectionDescriberCoreWithoutSubcollection,
+} from '..';
 
 /**
  * Contains a type guard that helps narrow down the type of the describer.

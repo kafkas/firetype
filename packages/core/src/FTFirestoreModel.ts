@@ -1,4 +1,4 @@
-import type { FTCollectionModel } from './FTCollectionModel';
+import type { FTCollectionModel } from '.';
 
 /**
  * Represents the data model for the entire Firestore database.

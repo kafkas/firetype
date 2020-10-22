@@ -1,6 +1,9 @@
-import type { FTCollectionModel, FTEnvironment } from '..';
-import type { FTCollectionDescriberCore } from '.';
-import type { FTCollectionDescriberCoreWithoutSubcollection } from './_WithoutSubcollection';
+import type {
+  FTEnvironment,
+  FTCollectionModel,
+  FTCollectionDescriberCore,
+  FTCollectionDescriberCoreWithoutSubcollection,
+} from '.';
 
 export interface FTCollectionDescriberCoreWithSubcollection<E extends FTEnvironment, CM extends FTCollectionModel>
   extends FTCollectionDescriberCoreWithoutSubcollection<E, CM> {

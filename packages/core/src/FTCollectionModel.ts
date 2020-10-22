@@ -1,4 +1,4 @@
-import type { FTDocumentData } from '../FTDocumentData';
+import type { FTDocumentData } from '.';
 
 /**
  * Represents the data model for a specific collection and its subcollections.

@@ -1,6 +1,6 @@
 import type { firestore as firestoreAdmin } from 'firebase-admin';
 import type { firestore as firestoreClient } from 'firebase';
-import type { FTCollectionModel, FTEnvironment, EditableFields } from '..';
+import type { FTCollectionModel, FTEnvironment, EditableFields } from '.';
 
 /**
  * A stricter version of `FirebaseFirestore.FirestoreDataConverter` where

@@ -1,4 +1,4 @@
-import type { FTCollectionModel } from '../models';
+import type { FTCollectionModel } from '..';
 import type { Subset } from './_types';
 
 /**

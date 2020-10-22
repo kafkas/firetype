@@ -2,7 +2,7 @@ import * as functions from 'firebase-functions';
 import type { FTFirestoreModel } from '@firetype/core';
 import { FTFunctionsFirestore } from './firestore';
 import type { FTFirestoreDescriber } from './FTFirestoreDescriber';
-import { FTFunctionBuilder } from './_FTFunctionBuilder';
+import { FTFunctionBuilder } from './FTFunctionBuilder';
 
 export class FTFunctions<FM extends FTFirestoreModel> {
   public readonly core: typeof functions;
