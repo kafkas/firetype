@@ -1,10 +1,10 @@
-import { FTCollectionReferenceCore, FTCollectionModel, FTProcessedModel } from '@firetype/core';
+import { FTCollectionReferenceCore, FTCollectionModel, FTModel } from '@firetype/core';
 import type { FTCollectionDescriber } from '../FTCollectionDescriber';
 import { FTDocumentReference } from '.';
 
 export class FTCollectionReference<CM extends FTCollectionModel> extends FTCollectionReferenceCore<'server', CM> {
   constructor(
-    public readonly core: FirebaseFirestore.CollectionReference<FTProcessedModel<CM>>,
+    public readonly core: FirebaseFirestore.CollectionReference<FTModel.Processed<CM>>,
     private readonly describer: FTCollectionDescriber<CM>
   ) {
     super();

@@ -1,3 +1,7 @@
+import * as FTModel from './FTModel';
+
+export { FTModel };
+
 export * from './firestore';
 export * from './utils';
 export * from './FTCollectionDescriberCore';
@@ -7,5 +11,3 @@ export * from './FTCollectionModel';
 export * from './FTDocumentData';
 export * from './FTEnvironment';
 export * from './FTFirestoreModel';
-export * from './FTProcessedModel';
-export * from './FTRawModel';

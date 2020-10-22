@@ -1,4 +1,4 @@
-import type { FTCollectionModel, FTRawModel } from '@firetype/core';
+import type { FTCollectionModel, FTModel } from '@firetype/core';
 import type { FTCollectionDescriber } from '../FTCollectionDescriber';
 
 export class FTDocumentSnapshot<CM extends FTCollectionModel> {
@@ -9,7 +9,7 @@ export class FTDocumentSnapshot<CM extends FTCollectionModel> {
   }
 
   constructor(
-    public core: FirebaseFirestore.DocumentSnapshot<FTRawModel<CM>>,
+    public core: FirebaseFirestore.DocumentSnapshot<FTModel.Raw<CM>>,
     private readonly describer: FTCollectionDescriber<CM>
   ) {
     this.core.data();

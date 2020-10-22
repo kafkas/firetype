@@ -1,16 +1,10 @@
-import {
-  FTDocumentReferenceCore,
-  FTCollectionModel,
-  FTProcessedModel,
-  FTRawModel,
-  DescriberUtils,
-} from '@firetype/core';
+import { FTDocumentReferenceCore, FTCollectionModel, FTModel, DescriberUtils } from '@firetype/core';
 import type { FTCollectionDescriber } from '../FTCollectionDescriber';
 import { FTCollectionReference } from '.';
 
 export class FTDocumentReference<CM extends FTCollectionModel> extends FTDocumentReferenceCore<'server', CM> {
   constructor(
-    public readonly core: FirebaseFirestore.DocumentReference<FTProcessedModel<CM>>,
+    public readonly core: FirebaseFirestore.DocumentReference<FTModel.Processed<CM>>,
     private readonly describer: FTCollectionDescriber<CM>
   ) {
     super();
@@ -27,7 +21,7 @@ export class FTDocumentReference<CM extends FTCollectionModel> extends FTDocumen
     );
   }
 
-  public update(data: Partial<FTRawModel<CM>>) {
+  public update(data: Partial<FTModel.Raw<CM>>) {
     return this.core.update(data);
   }
 }
