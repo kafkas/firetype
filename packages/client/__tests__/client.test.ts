@@ -52,7 +52,9 @@ interface FirestoreModel {
 const emailsDescriber: FTCollectionDescriber<EmailsCollectionModel> = {
   converter: {
     toFirestore: email => {
-      return {};
+      return {
+        tags: FTFieldValue.arrayRemove(),
+      };
     },
     fromFirestore: (snapshot, options) => {
       return new Email(snapshot.data(options));
@@ -76,4 +78,6 @@ const anarEmailDocRef = emailsCollection.doc(email);
 
 anarEmailDocRef.update({
   metadata: FTFieldValue.delete(),
+
+  nestedField: {},
 });

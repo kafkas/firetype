@@ -1,6 +1,16 @@
 import type { firestore as firestoreClient } from 'firebase';
 import type { firestore as firestoreAdmin } from 'firebase-admin';
-import type { FTEnvironment, FTCollectionModel, FTModel, FTFieldValueDelete, FTFieldValueServerTimestamp } from '..';
+import type {
+  FTEnvironment,
+  FTCollectionModel,
+  FTModel,
+  FTFieldValueDelete,
+  FTFieldValueServerTimestamp,
+  FTFieldValueArrayRemove,
+  FTFieldValueArrayUnion,
+  FTFieldValueIncrement,
+  FTFieldValueDecrement,
+} from '..';
 
 type FirestoreTimestamp<E extends FTEnvironment> = E extends 'client'
   ? firestoreClient.Timestamp
@@ -40,11 +50,17 @@ type LegalValue_4<E extends FTEnvironment, V> = V extends FirestoreDocumentRefer
   ? FirestoreDocumentReference<E, T>
   : LegalValue_5<E, V>;
 
-type LegalValue_5<E extends FTEnvironment, V> = V extends Array<infer T>
-  ? Array<LegalValue_1<E, T>>
+type LegalValue_5<E extends FTEnvironment, V> = V extends number
+  ? FTFieldValueIncrement | FTFieldValueDecrement | number
   : LegalValue_6<E, V>;
 
-type LegalValue_6<E extends FTEnvironment, V> = V extends object
+type LegalValue_6<E extends FTEnvironment, V> = V extends Array<infer T>
+  ? T extends string | number
+    ? T[] | FTFieldValueArrayRemove<T> | FTFieldValueArrayUnion<T>
+    : Array<LegalValue_1<E, T>>
+  : LegalValue_7<E, V>;
+
+type LegalValue_7<E extends FTEnvironment, V> = V extends object
   ? {
       [K in keyof V]: LegalValue_1<E, V[K]>;
     }
