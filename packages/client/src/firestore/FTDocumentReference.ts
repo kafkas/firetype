@@ -20,13 +20,4 @@ export class FTDocumentReference<CM extends FTCollectionModel> extends FTDocumen
       this.describer.sub[key]
     );
   }
-
-  /**
-
-   * @param data - An object containing editable fields with their new values. The keys that you
-   * have marked as read-only in the collection model are not accepted.
-   */
-  public update(data: Partial<FTModel.EditableSubtype<CM>>) {
-    return this.core.update(data);
-  }
 }

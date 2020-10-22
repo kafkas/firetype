@@ -74,4 +74,4 @@ const email = 'anarkafkas@gmail.com';
 const emailsCollection = Firestore.collection('emails');
 const anarEmailDocRef = emailsCollection.doc(email);
 
-anarEmailDocRef.update({ from: '' });
+anarEmailDocRef.update({});

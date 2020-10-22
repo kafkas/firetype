@@ -20,8 +20,4 @@ export class FTDocumentReference<CM extends FTCollectionModel> extends FTDocumen
       this.describer.sub[key]
     );
   }
-
-  public update(data: Partial<FTModel.Raw<CM>>) {
-    return this.core.update(data);
-  }
 }
