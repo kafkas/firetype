@@ -13,8 +13,6 @@ export abstract class FTDocumentReferenceCore<E extends FTEnvironment, CM extend
   ): FTCollectionReferenceCore<E, NonNullable<CM['sub']>[K]>;
 
   public update(data: FTModel.LegalOutgoingData<E, CM>) {
-    // TODO: Replace FTFieldValues in `data` with their corresponding FieldValue objects.
-    // Then call this.core.update(modifiedData)
     return this.core.update(data) as Promise<E extends 'client' ? void : firestoreAdmin.WriteResult>;
   }
 }
