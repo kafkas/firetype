@@ -1,4 +1,4 @@
-import { FTCollectionDescriber, FTFirestoreDescriber, FTFirestore, FTFieldValue } from '../src';
+import { FTCollectionDescriber, FTFirestoreDescriber, FTFirestore } from '../src';
 
 interface EmailsCollectionModel {
   model: {
