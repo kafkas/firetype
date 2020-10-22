@@ -1,3 +1,4 @@
+import type { firestore } from 'firebase-admin';
 import { FTFunctions, FTFirestore, FTCollectionDescriber, FTFirestoreDescriber } from '../src';
 
 interface EmailsCollectionModel {
@@ -14,9 +15,27 @@ interface EmailsCollectionModel {
 interface EmailDoc {
   from: string;
   to: string;
-  metadata?: string;
-  sentAt: Date;
-  receivedAt: Date;
+  tags: string[];
+  someObjects: {
+    code: number;
+    isFavourite?: boolean;
+    location: firestore.GeoPoint;
+    createdAt: firestore.Timestamp;
+    stuff: null | string[];
+  }[];
+  nestedField: {
+    createdById: string;
+    createdBy?: string;
+    expiresAt?: firestore.Timestamp;
+    likedBy: string[];
+    createdAt: firestore.Timestamp;
+  };
+  lastLocation: firestore.GeoPoint;
+  favEmailRef: firestore.DocumentReference<EmailDoc>;
+  metadata?: string | null;
+  timestamp?: number;
+  sentAt?: firestore.Timestamp;
+  receivedAt: firestore.Timestamp;
 }
 
 class Email {
@@ -34,9 +53,7 @@ interface FirestoreModel {
 const emailsDescriber: FTCollectionDescriber<EmailsCollectionModel> = {
   converter: {
     toFirestore: email => {
-      return {
-        metadata,
-      };
+      return {};
     },
     fromFirestore: snapshot => {
       const emailRaw = snapshot.data();

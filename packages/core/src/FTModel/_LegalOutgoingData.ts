@@ -1,6 +1,6 @@
 import type { firestore as firestoreClient } from 'firebase';
 import type { firestore as firestoreAdmin } from 'firebase-admin';
-import type { FTEnvironment, FTCollectionModel, FTModel } from '..';
+import type { FTEnvironment, FTCollectionModel, FTModel, FTFieldValueDelete, FTFieldValueServerTimestamp } from '..';
 
 type FirestoreTimestamp<E extends FTEnvironment> = E extends 'client'
   ? firestoreClient.Timestamp
@@ -49,8 +49,3 @@ type LegalValue_6<E extends FTEnvironment, V> = V extends object
       [K in keyof V]: LegalValue_1<E, V[K]>;
     }
   : V;
-
-// TODO: Replace these with the real FTFieldValue
-class FTFieldValueDelete {}
-
-class FTFieldValueServerTimestamp {}

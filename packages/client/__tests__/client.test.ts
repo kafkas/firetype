@@ -1,5 +1,5 @@
 import type { firestore } from 'firebase';
-import { FTCollectionDescriber, FTFirestoreDescriber, FTFirestore } from '../src';
+import { FTCollectionDescriber, FTFirestoreDescriber, FTFirestore, FTFieldValue } from '../src';
 
 interface EmailsCollectionModel {
   model: {
@@ -74,4 +74,6 @@ const email = 'anarkafkas@gmail.com';
 const emailsCollection = Firestore.collection('emails');
 const anarEmailDocRef = emailsCollection.doc(email);
 
-anarEmailDocRef.update({});
+anarEmailDocRef.update({
+  metadata: FTFieldValue.delete(),
+});
