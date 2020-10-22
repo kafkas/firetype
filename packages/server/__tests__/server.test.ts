@@ -5,11 +5,16 @@ interface EmailsCollectionModel {
     raw: EmailDoc;
     processed: Email;
   };
+  readonlyFields: {
+    sentAt: true;
+    receivedAt: true;
+  };
 }
 
 interface EmailDoc {
   from: string;
   to: string;
+  metadata?: string;
   sentAt: Date;
   receivedAt: Date;
 }
@@ -28,7 +33,11 @@ interface FirestoreModel {
 
 const emailsDescriber: FTCollectionDescriber<EmailsCollectionModel> = {
   converter: {
-    toFirestore: email => email.raw,
+    toFirestore: email => {
+      return {
+        metadata,
+      };
+    },
     fromFirestore: snapshot => {
       const emailRaw = snapshot.data();
       return new Email(emailRaw);
