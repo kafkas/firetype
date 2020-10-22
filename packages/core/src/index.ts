@@ -7,3 +7,5 @@ export * from './FTCollectionModel';
 export * from './FTDocumentData';
 export * from './FTEnvironment';
 export * from './FTFirestoreModel';
+export * from './FTProcessedModel';
+export * from './FTRawModel';

@@ -1,9 +1,9 @@
-import type { FTCollectionModel } from '@firetype/core';
+import type { FTCollectionModel, FTRawModel } from '@firetype/core';
 import type { FTCollectionDescriber } from '../FTCollectionDescriber';
 
 export class FTQueryDocumentSnapshot<CM extends FTCollectionModel> {
   constructor(
-    public core: FirebaseFirestore.QueryDocumentSnapshot<CM['model']['raw']>,
+    public core: FirebaseFirestore.QueryDocumentSnapshot<FTRawModel<CM>>,
     private readonly describer: FTCollectionDescriber<CM>
   ) {}
 

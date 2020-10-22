@@ -1,19 +1,19 @@
 import type { firestore as firestoreAdmin } from 'firebase-admin';
 import type { firestore as firestoreClient } from 'firebase';
-import type { FTCollectionModel, FTEnvironment, EditableFields } from '.';
+import type { FTEnvironment, FTCollectionModel, FTRawModel, FTProcessedModel, EditableFields } from '.';
 
 /**
  * A stricter version of `FirebaseFirestore.FirestoreDataConverter` where
  * `RM` represents the raw model and `M` represents the main model.
  */
 interface ModelConverter<E extends FTEnvironment, CM extends FTCollectionModel> {
-  toFirestore: (modelObject: CM['model']['processed']) => EditableFields<CM>;
+  toFirestore: (modelObject: FTProcessedModel<CM>) => EditableFields<CM>;
   fromFirestore: E extends 'client'
     ? (
-        snapshot: firestoreClient.QueryDocumentSnapshot<CM['model']['raw']>,
+        snapshot: firestoreClient.QueryDocumentSnapshot<FTRawModel<CM>>,
         options: firestoreClient.SnapshotOptions
-      ) => CM['model']['processed']
-    : (snapshot: firestoreAdmin.QueryDocumentSnapshot<CM['model']['raw']>) => CM['model']['processed'];
+      ) => FTProcessedModel<CM>
+    : (snapshot: firestoreAdmin.QueryDocumentSnapshot<FTRawModel<CM>>) => FTProcessedModel<CM>;
 }
 
 export interface FTCollectionDescriberCoreWithoutSubcollection<E extends FTEnvironment, CM extends FTCollectionModel> {

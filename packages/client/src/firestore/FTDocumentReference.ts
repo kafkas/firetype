@@ -1,10 +1,16 @@
-import { FTDocumentReferenceCore, FTCollectionModel, DescriberUtils, EditableFields } from '@firetype/core';
+import {
+  FTDocumentReferenceCore,
+  FTCollectionModel,
+  DescriberUtils,
+  EditableFields,
+  FTProcessedModel,
+} from '@firetype/core';
 import type { FTCollectionDescriber } from '../FTCollectionDescriber';
 import { FTCollectionReference } from '.';
 
 export class FTDocumentReference<CM extends FTCollectionModel> extends FTDocumentReferenceCore<'client', CM> {
   constructor(
-    public readonly core: firebase.firestore.DocumentReference<CM['model']['processed']>,
+    public readonly core: firebase.firestore.DocumentReference<FTProcessedModel<CM>>,
     private readonly describer: FTCollectionDescriber<CM>
   ) {
     super();
@@ -22,6 +28,7 @@ export class FTDocumentReference<CM extends FTCollectionModel> extends FTDocumen
   }
 
   /**
+
    * @param data - An object containing editable fields with their new values. The keys that you
    * have marked as read-only in the collection model are not accepted.
    */
