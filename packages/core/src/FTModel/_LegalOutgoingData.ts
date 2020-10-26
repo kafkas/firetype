@@ -25,47 +25,51 @@ type FirestoreDocumentReference<E extends FTEnvironment, T> = E extends 'client'
   : firestoreAdmin.DocumentReference<T>;
 
 /**
- * Derives the shape of the raw object that can be used in and FTDocumentReference.set()
- * (without merge) method.
+ * Derives the shape of the raw object that can be used in and `set()`
+ * (without merge) and `add()` methods.
  */
-export type LegalOutgoingData<E extends FTEnvironment, CM extends FTCollectionModel> = E extends 'client'
+export type LegalOutgoingSetData<E extends FTEnvironment, CM extends FTCollectionModel> = LegalOutgoingData<
+  E,
+  CM,
+  'set'
+>;
+
+export type LegalOutgoingUpdateData<E extends FTEnvironment, CM extends FTCollectionModel> = Partial<
+  LegalOutgoingData<E, CM, 'update'>
+>;
+
+type LegalOutgoingData<
+  E extends FTEnvironment,
+  CM extends FTCollectionModel,
+  TP extends 'set' | 'update'
+> = E extends 'client'
   ? {
-      [K in keyof FTModel.EditableSubtype<CM>]: LegalValue<E, FTModel.Raw<CM>[K]>;
+      [K in keyof FTModel.EditableSubtype<CM>]: LegalValue<E, FTModel.Raw<CM>[K], TP>;
     }
   : {
-      [K in FTModel.Fields<CM>]: LegalValue<E, FTModel.Raw<CM>[K]>;
+      [K in FTModel.Fields<CM>]: LegalValue<E, FTModel.Raw<CM>[K], TP>;
     };
 
-type LegalValue<E extends FTEnvironment, V> = LegalValue_1<E, V>;
+type LegalValue<E extends FTEnvironment, V, TP extends 'set' | 'update'> = undefined extends V
+  ? TP extends 'update'
+    ? FTFieldValueDelete | LegalDefinedValue<E, V, TP>
+    : LegalDefinedValue<E, V, TP>
+  : LegalDefinedValue<E, V, TP>;
 
-type LegalValue_1<E extends FTEnvironment, V> = undefined extends V
-  ? FTFieldValueDelete | LegalValue_2<E, V>
-  : LegalValue_2<E, V>;
-
-type LegalValue_2<E extends FTEnvironment, V> = V extends FirestoreTimestamp<E>
+type LegalDefinedValue<E extends FTEnvironment, V, TP extends 'set' | 'update'> = V extends FirestoreTimestamp<E>
   ? FTFieldValueServerTimestamp | FirestoreTimestamp<E>
-  : LegalValue_3<E, V>;
-
-type LegalValue_3<E extends FTEnvironment, V> = V extends FirestoreGeoPoint<E>
+  : V extends FirestoreGeoPoint<E>
   ? FirestoreGeoPoint<E>
-  : LegalValue_4<E, V>;
-
-type LegalValue_4<E extends FTEnvironment, V> = V extends FirestoreDocumentReference<E, infer T>
+  : V extends FirestoreDocumentReference<E, infer T>
   ? FirestoreDocumentReference<E, T>
-  : LegalValue_5<E, V>;
-
-type LegalValue_5<E extends FTEnvironment, V> = V extends number
+  : V extends number
   ? FTFieldValueIncrement | FTFieldValueDecrement | number
-  : LegalValue_6<E, V>;
-
-type LegalValue_6<E extends FTEnvironment, V> = V extends Array<infer T>
+  : V extends Array<infer T>
   ? T extends string | number
     ? T[] | FTFieldValueArrayRemove<T> | FTFieldValueArrayUnion<T>
-    : Array<LegalValue_1<E, T>>
-  : LegalValue_7<E, V>;
-
-type LegalValue_7<E extends FTEnvironment, V> = V extends object
+    : Array<TP extends 'set' ? LegalDefinedValue<E, T, TP> : LegalValue<E, T, TP>>
+  : V extends object
   ? {
-      [K in keyof V]: LegalValue_1<E, V[K]>;
+      [K in keyof V]: TP extends 'set' ? LegalDefinedValue<E, V[K], TP> : LegalValue<E, V[K], TP>;
     }
   : V;

@@ -19,6 +19,9 @@ interface EmailDoc {
   from: string;
   to: string;
   tags: string[];
+  /**
+   * This is a beautiful field.
+   */
   someObjects: {
     code: number;
     isFavourite?: boolean;

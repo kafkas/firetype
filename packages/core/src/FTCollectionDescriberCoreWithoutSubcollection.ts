@@ -7,7 +7,8 @@ import type { FTEnvironment, FTCollectionModel, FTModel } from '.';
  * `RM` represents the raw model and `M` represents the main model.
  */
 interface ModelConverter<E extends FTEnvironment, CM extends FTCollectionModel> {
-  toFirestore: (modelObject: FTModel.Processed<CM>) => FTModel.LegalOutgoingData<E, CM>;
+  // TODO: Change this to an object so we can properly handle both set(data) and set(data, opts) cases
+  toFirestore: (modelObject: FTModel.Processed<CM>) => FTModel.LegalOutgoingSetData<E, CM>;
   fromFirestore: E extends 'client'
     ? (
         snapshot: firestoreClient.QueryDocumentSnapshot<FTModel.Raw<CM>>,

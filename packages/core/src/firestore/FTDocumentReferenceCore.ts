@@ -12,7 +12,7 @@ export abstract class FTDocumentReferenceCore<E extends FTEnvironment, CM extend
     key: K
   ): FTCollectionReferenceCore<E, NonNullable<CM['sub']>[K]>;
 
-  public update(data: Partial<FTModel.LegalOutgoingData<E, CM>>) {
+  public update(data: FTModel.LegalOutgoingUpdateData<E, CM>) {
     return this.core.update(data) as Promise<E extends 'client' ? void : firestoreAdmin.WriteResult>;
   }
 }
