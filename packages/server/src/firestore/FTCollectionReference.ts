@@ -4,14 +4,27 @@ import { FTDocumentReference } from '.';
 
 export class FTCollectionReference<CM extends FTCollectionModel> extends FTCollectionReferenceCore<'server', CM> {
   constructor(
-    public readonly core: FirebaseFirestore.CollectionReference<FTModel.Processed<CM>>,
-    private readonly describer: FTCollectionDescriber<CM>
+    public readonly core: FirebaseFirestore.CollectionReference,
+    public readonly describer: FTCollectionDescriber<CM>
   ) {
     super();
-    this.core = core.withConverter(this.describer.converter);
+  }
+
+  public get coreWithSetConverter() {
+    return this.core.withConverter(({
+      fromFirestore: this.describer.converter.fromFirestore,
+      toFirestore: this.describer.converter.toFirestore.set,
+    } as unknown) as FirebaseFirestore.FirestoreDataConverter<FTModel.Processed<CM>>); // FIXME
+  }
+
+  public get coreWithSetMergeConverter() {
+    return this.core.withConverter(({
+      fromFirestore: this.describer.converter.fromFirestore,
+      toFirestore: this.describer.converter.toFirestore.setMerge,
+    } as unknown) as FirebaseFirestore.FirestoreDataConverter<FTModel.Processed<CM>>); // FIXME
   }
 
   public doc(uid: string) {
-    return new FTDocumentReference(this.core.doc(uid), this.describer);
+    return new FTDocumentReference(this, uid);
   }
 }

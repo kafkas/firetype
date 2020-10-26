@@ -11,9 +11,7 @@ export class FTDocumentSnapshot<CM extends FTCollectionModel> {
   constructor(
     public core: FirebaseFirestore.DocumentSnapshot<FTModel.Raw<CM>>,
     private readonly describer: FTCollectionDescriber<CM>
-  ) {
-    this.core.data();
-  }
+  ) {}
 
   /**
    * Checks whether the snapshot contains a `createTime`. If yes, uses the converter in the describer

@@ -4,6 +4,14 @@ import type { FTCollectionModel, FTModel, FTEnvironment } from '..';
 
 export abstract class FTCollectionReferenceCore<E extends FTEnvironment, CM extends FTCollectionModel> {
   public abstract readonly core: E extends 'client'
+    ? firestoreClient.CollectionReference
+    : firestoreAdmin.CollectionReference;
+
+  public abstract readonly coreWithSetConverter: E extends 'client'
+    ? firestoreClient.CollectionReference<FTModel.Processed<CM>>
+    : firestoreAdmin.CollectionReference<FTModel.Processed<CM>>;
+
+  public abstract readonly coreWithSetMergeConverter: E extends 'client'
     ? firestoreClient.CollectionReference<FTModel.Processed<CM>>
     : firestoreAdmin.CollectionReference<FTModel.Processed<CM>>;
 
@@ -26,7 +34,7 @@ export abstract class FTCollectionReferenceCore<E extends FTEnvironment, CM exte
       ? FTModel.Raw<CM>[F][]
       : FTModel.Raw<CM>[F]
   ) {
-    return this.core.where(<string>field, opStr, value) as E extends 'client'
+    return this.coreWithSetConverter.where(<string>field, opStr, value) as E extends 'client'
       ? firestoreClient.Query<FTModel.Processed<CM>>
       : FirebaseFirestore.Query<FTModel.Processed<CM>>;
   }

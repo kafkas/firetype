@@ -5,6 +5,14 @@ import type { FTCollectionReferenceCore } from '.';
 
 export abstract class FTDocumentReferenceCore<E extends FTEnvironment, CM extends FTCollectionModel> {
   public abstract readonly core: E extends 'client'
+    ? firestoreClient.DocumentReference
+    : firestoreAdmin.DocumentReference;
+
+  public abstract readonly coreWithSetConverter: E extends 'client'
+    ? firestoreClient.DocumentReference<FTModel.Processed<CM>>
+    : firestoreAdmin.DocumentReference<FTModel.Processed<CM>>;
+
+  public abstract readonly coreWithSetMergeConverter: E extends 'client'
     ? firestoreClient.DocumentReference<FTModel.Processed<CM>>
     : firestoreAdmin.DocumentReference<FTModel.Processed<CM>>;
 
