@@ -1,6 +1,6 @@
 {
   "name": "@firetype/client",
-  "version": "0.0.7",
+  "version": "0.1.0",
   "description": "Firetype Client",
   "author": "Anar Kafkas <anarkafkas@gmail.com>",
   "homepage": "https://github.com/kafkas/firetype#readme",
@@ -41,6 +41,6 @@
     "firebase": "^7.24.0"
   },
   "dependencies": {
-    "@firetype/core": "^0.0.7"
+    "@firetype/core": "^0.1.0"
   }
 }
