@@ -75,6 +75,7 @@ const describer: FTFirestoreDescriber<FirestoreModel> = {
 const Firestore = new FTFirestore<FirestoreModel>(describer);
 
 const emailsQuery = Firestore.collection('emails').where('sentAt', '<=', new Date());
+const emailsQueryRaw = Firestore.collection('emails').core.where('sentAt', '<=', new Date());
 
 emailsQuery.get();
 

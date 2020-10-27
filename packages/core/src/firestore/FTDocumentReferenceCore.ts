@@ -17,13 +17,13 @@ export abstract class FTDocumentReferenceCore<E extends FTEnvironment, CM extend
       : firestoreAdmin.DocumentReference;
   }
 
-  public get coreWithSetConverter() {
+  private get coreWithSetConverter() {
     return this.collectionRef.coreWithSetConverter.doc(this.uid) as E extends 'client'
       ? firestoreClient.DocumentReference<FTModel.Processed<CM>>
       : firestoreAdmin.DocumentReference<FTModel.Processed<CM>>;
   }
 
-  public get coreWithSetMergeConverter() {
+  private get coreWithSetMergeConverter() {
     return this.collectionRef.coreWithSetMergeConverter.doc(this.uid) as E extends 'client'
       ? firestoreClient.DocumentReference<FTModel.Processed<CM>>
       : firestoreAdmin.DocumentReference<FTModel.Processed<CM>>;
