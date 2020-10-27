@@ -11,7 +11,7 @@ Firetype Client wraps the [Firebase JS SDK](https://github.com/firebase/firebase
         <img src="https://img.shields.io/bundlephobia/min/@firetype/client" /></a>
     <a href="https://" alt="Types">
         <img src="https://img.shields.io/npm/types/@firetype/client" /></a>  
-    <a href="https://" alt="Activity">
+    <a href="https://" alt="Last Commit">
         <img src="https://img.shields.io/github/last-commit/kafkas/firetype" /></a>
     <a href="https://npmjs.com/package/@firetype/client" alt="Downloads">
         <img src="https://img.shields.io/npm/dm/@firetype/client" /></a>
