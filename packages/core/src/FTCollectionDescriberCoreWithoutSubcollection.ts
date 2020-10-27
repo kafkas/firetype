@@ -28,6 +28,16 @@ interface ModelConverter<E extends FTEnvironment, CM extends FTCollectionModel> 
     : (snapshot: firestoreAdmin.QueryDocumentSnapshot<FTModel.Raw<CM>>) => FTModel.Processed<CM>;
 }
 
+export interface SetConverter<E extends FTEnvironment, CM extends FTCollectionModel> {
+  fromFirestore: ModelConverter<E, CM>['fromFirestore'];
+  toFirestore: ModelConverter<E, CM>['toFirestore']['set'];
+}
+
+export interface SetMergeConverter<E extends FTEnvironment, CM extends FTCollectionModel> {
+  fromFirestore: ModelConverter<E, CM>['fromFirestore'];
+  toFirestore: ModelConverter<E, CM>['toFirestore']['setMerge'];
+}
+
 export interface FTCollectionDescriberCoreWithoutSubcollection<E extends FTEnvironment, CM extends FTCollectionModel> {
   converter: ModelConverter<E, CM>;
 }

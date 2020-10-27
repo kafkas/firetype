@@ -2,20 +2,8 @@ import { FTDocumentReferenceCore, FTCollectionModel, DescriberUtils } from '@fir
 import { FTCollectionReference } from '.';
 
 export class FTDocumentReference<CM extends FTCollectionModel> extends FTDocumentReferenceCore<'server', CM> {
-  constructor(private readonly collectionRef: FTCollectionReference<CM>, private readonly uid: string) {
+  constructor(protected readonly collectionRef: FTCollectionReference<CM>, protected readonly uid: string) {
     super();
-  }
-
-  public get core() {
-    return this.collectionRef.core.doc(this.uid);
-  }
-
-  public get coreWithSetConverter() {
-    return this.collectionRef.coreWithSetConverter.doc(this.uid);
-  }
-
-  public get coreWithSetMergeConverter() {
-    return this.collectionRef.coreWithSetMergeConverter.doc(this.uid);
   }
 
   public collection<K extends keyof CM['sub']>(key: K) {
