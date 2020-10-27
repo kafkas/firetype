@@ -1,11 +1,3 @@
-# `@firetype/core`
+# Firetype Client
 
-> TODO: description
-
-## Usage
-
-```
-const core = require('@firetype/core');
-
-// TODO: DEMONSTRATE API
-```
+You shouldn't need to install this package yourself.
