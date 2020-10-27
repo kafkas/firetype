@@ -9,7 +9,9 @@ import type {
   SetMergeConverter,
 } from '..';
 
-type WithConverter<E extends FTEnvironment, CM extends FTCollectionModel, TP extends 'set' | 'setMerge'> = (
+type SetType = 'set' | 'setMerge';
+
+type WithConverter<E extends FTEnvironment, CM extends FTCollectionModel, TP extends SetType> = (
   converter: TP extends 'set' ? SetConverter<E, CM> : SetMergeConverter<E, CM>
 ) => E extends 'client'
   ? firestoreClient.CollectionReference<FTModel.Processed<CM>>
@@ -22,22 +24,18 @@ export abstract class FTCollectionReferenceCore<E extends FTEnvironment, CM exte
 
   public abstract readonly describer: FTCollectionDescriberCore<E, CM>;
 
-  public get coreWithSetConverter() {
+  /**
+   * Applies one of the 2 converters provided in the describer to this collection.
+   * @param setType Either `"set"` or `"setMerge"`.
+   * @returns A `CollectionReference` to which a specified converter is applied.
+   */
+  public coreWithConverter<ST extends SetType>(setType: ST) {
     // We need this assertion to prevent "Incompatible call signature" error.
     // See https://github.com/microsoft/TypeScript/issues/7294
-    return ((this.core.withConverter as unknown) as WithConverter<E, CM, 'set'>)({
+    return ((this.core.withConverter as unknown) as WithConverter<E, CM, ST>)({
       fromFirestore: this.describer.converter.fromFirestore,
-      toFirestore: this.describer.converter.toFirestore.set,
-    });
-  }
-
-  public get coreWithSetMergeConverter() {
-    // We need this assertion to prevent "Incompatible call signature" error.
-    // See https://github.com/microsoft/TypeScript/issues/7294
-    return ((this.core.withConverter as unknown) as WithConverter<E, CM, 'setMerge'>)({
-      fromFirestore: this.describer.converter.fromFirestore,
-      toFirestore: this.describer.converter.toFirestore.setMerge,
-    });
+      toFirestore: this.describer.converter.toFirestore[setType],
+    } as ST extends 'set' ? SetConverter<E, CM> : SetMergeConverter<E, CM>);
   }
 
   /**
@@ -59,7 +57,7 @@ export abstract class FTCollectionReferenceCore<E extends FTEnvironment, CM exte
       ? FTModel.Raw<CM>[F][]
       : FTModel.Raw<CM>[F]
   ) {
-    return this.coreWithSetConverter.where(<string>field, opStr, value) as E extends 'client'
+    return this.coreWithConverter('set').where(<string>field, opStr, value) as E extends 'client'
       ? firestoreClient.Query<FTModel.Processed<CM>>
       : FirebaseFirestore.Query<FTModel.Processed<CM>>;
   }

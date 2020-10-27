@@ -17,14 +17,8 @@ export abstract class FTDocumentReferenceCore<E extends FTEnvironment, CM extend
       : firestoreAdmin.DocumentReference;
   }
 
-  private get coreWithSetConverter() {
-    return this.collectionRef.coreWithSetConverter.doc(this.uid) as E extends 'client'
-      ? firestoreClient.DocumentReference<FTModel.Processed<CM>>
-      : firestoreAdmin.DocumentReference<FTModel.Processed<CM>>;
-  }
-
-  private get coreWithSetMergeConverter() {
-    return this.collectionRef.coreWithSetMergeConverter.doc(this.uid) as E extends 'client'
+  private coreWithConverter<ST extends 'set' | 'setMerge'>(setType: ST) {
+    return this.collectionRef.coreWithConverter(setType).doc(this.uid) as E extends 'client'
       ? firestoreClient.DocumentReference<FTModel.Processed<CM>>
       : firestoreAdmin.DocumentReference<FTModel.Processed<CM>>;
   }
@@ -33,14 +27,14 @@ export abstract class FTDocumentReferenceCore<E extends FTEnvironment, CM extend
    * This is equivalent to `set(data)`.
    */
   public set(data: FTModel.LegalOutgoingSetData<E, CM>) {
-    return this.coreWithSetConverter.set(data) as Promise<E extends 'client' ? void : firestoreAdmin.WriteResult>;
+    return this.coreWithConverter('set').set(data) as Promise<E extends 'client' ? void : firestoreAdmin.WriteResult>;
   }
 
   /**
    * This is equivalent to `set(data, { merge: true })`. To provide `mergeFields` option you must escape to core.
    */
   public setMerge(data: FTModel.LegalOutgoingUpdateData<E, CM>) {
-    return this.coreWithSetMergeConverter.set(data, {
+    return this.coreWithConverter('setMerge').set(data, {
       merge: true,
     }) as Promise<E extends 'client' ? void : firestoreAdmin.WriteResult>;
   }
