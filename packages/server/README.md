@@ -97,7 +97,7 @@ interface FirestoreModel {
 
 The key that you choose (in our case `emails`) will be the Firestore key associated with the collection.
 
-We now have one final task, which is to create our Firestore **describer** that consists of one **collection describer**. A collection describer is an object that contains details such as model converters and subcollection describers (see [`FTCollectionDescriber`](src/FTCollectionDescriber.ts.ts))
+We now have one final task, which is to create our Firestore **describer** that consists of one **collection describer**. A collection describer is an object that contains details such as model converters and subcollection describers (see [`FTCollectionDescriber`](src/FTCollectionDescriber.ts))
 
 ```ts
 import type { FTFirestoreDescriber } from '@firetype/server';
@@ -228,9 +228,9 @@ import { FTFunctions } from '@firetype/server';
 export const Functions = new FTFunctions<FirestoreModel>(describer);
 ```
 
-Below are a several examples that show the difference between using Firetype and raw Firebase objects.
-
 ## Examples
+
+Below are a several examples that show the difference between using Firetype and raw Firebase objects.
 
 ### Accessing a collection
 
