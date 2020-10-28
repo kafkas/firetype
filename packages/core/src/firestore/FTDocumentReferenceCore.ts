@@ -26,14 +26,14 @@ export abstract class FTDocumentReferenceCore<E extends FTEnvironment, CM extend
   /**
    * This is equivalent to `set(data)`.
    */
-  public set(data: FTModel.LegalOutgoingSetData<E, CM>) {
+  public set(data: FTModel.Processed<CM>) {
     return this.coreWithConverter('set').set(data) as Promise<E extends 'client' ? void : firestoreAdmin.WriteResult>;
   }
 
   /**
    * This is equivalent to `set(data, { merge: true })`. To provide `mergeFields` option you must escape to core.
    */
-  public setMerge(data: FTModel.LegalOutgoingUpdateData<E, CM>) {
+  public setMerge(data: Partial<FTModel.Processed<CM>>) {
     return this.coreWithConverter('setMerge').set(data, {
       merge: true,
     }) as Promise<E extends 'client' ? void : firestoreAdmin.WriteResult>;
