@@ -271,7 +271,7 @@ Firestore.collection('emails')
   .update({
     aNonExistentField: '123', // TS Error: Field does not exist.
     isSaved: new Date(), // TS Error: Must be a boolean.
-    lastModifiedAt: [1, 2, 3], // TS Error: Must be Date or Firestore.Timestamp or FTFieldValueServerTimestamp
+    lastModifiedAt: [1, 2, 3], // TS Error: Must be Date or firestore.Timestamp or FTFieldValueServerTimestamp
     anOptionalField: FTFieldValue.delete(), // OK
     aReadonlyField: 'some_value', // TS Error: Field is read-only for clients
   });
@@ -279,4 +279,47 @@ Firestore.collection('emails')
 
 ## API
 
-TODO
+### [FTCollectionModel](../core/src/FTCollectionModel.ts)
+
+Represents the data model for a specific collection and its subcollections. You don't need to import `FTCollectionModel` and use it in your code. Instead you need to make sure that your collection models have the same shape as `FTCollectionModel`.
+
+#### Properties:
+
+- `model`: Contains the raw and processed models.
+  - `raw`: The shape of the documents belonging to this collection.
+  - `processed`: The processed model. You can make this
+- `readonlyFields` (optional): An object type whose keys are the field names in the raw model that are read-only for clients and values are `true`. You can mark fields as read-only in Firestore Security rules.
+- `sub` (optional): Contains the collection models for all subcollections keyed by their actual keys on Firestore.
+
+#### Definition:
+
+```ts
+interface FTCollectionModel {
+  model: {
+    raw: FTDocumentData;
+    processed: unknown;
+  };
+  readonlyFields?: {
+    [field: string]: true;
+  };
+  sub?: {
+    [collectionKey: string]: FTCollectionModel;
+  };
+}
+```
+
+### [FTFirestoreModel](../core/src/FTFirestoreModel.ts)
+
+Represents the data model for the entire Firestore database. As with `FTCollectionModel` you don't need to import `FTFirestoreModel` and use it in your code. Instead you need to make sure that your Firestore model has the same shape as `FTFirestoreModel`.
+
+#### Properties:
+
+A key for each collection at the root level, with each key mapped to a `FTCollectionModel`.
+
+#### Definition:
+
+```ts
+interface FTFirestoreModel {
+  [collectionKey: string]: FTCollectionModel;
+}
+```
