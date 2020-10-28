@@ -1,9 +1,21 @@
 {
   "name": "@firetype/server",
   "version": "0.1.1",
-  "description": "Firetype Server",
+  "description": "Firetype Server library for Firebase Admin and Cloud Functions SDKs",
+  "keywords": [
+    "Firetype",
+    "firetype",
+    "firetype server",
+    "firetype admin",
+    "Firebase",
+    "firebase",
+    "TypeScript",
+    "typescript",
+    "cloud firestore",
+    "cloud functions"
+  ],
   "author": "Anar Kafkas <anarkafkas@gmail.com>",
-  "homepage": "https://github.com/kafkas/firetype#readme",
+  "homepage": "https://github.com/kafkas/firetype/tree/main/packages/server",
   "license": "MIT",
   "main": "lib/cjs/index.js",
   "module": "lib/esm/index.js",

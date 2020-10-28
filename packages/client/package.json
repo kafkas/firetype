@@ -1,9 +1,20 @@
 {
   "name": "@firetype/client",
   "version": "0.1.1",
-  "description": "Firetype Client",
+  "description": "Firetype Client library for Firebase JS SDK",
+  "keywords": [
+    "Firetype",
+    "firetype",
+    "firetype client",
+    "Firebase",
+    "firebase",
+    "TypeScript",
+    "typescript",
+    "cloud firestore",
+    "cloud functions"
+  ],
   "author": "Anar Kafkas <anarkafkas@gmail.com>",
-  "homepage": "https://github.com/kafkas/firetype#readme",
+  "homepage": "https://github.com/kafkas/firetype/tree/main/packages/client",
   "license": "MIT",
   "main": "lib/cjs/index.js",
   "module": "lib/esm/index.js",
