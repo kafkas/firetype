@@ -57,7 +57,7 @@ type LegalValue<E extends FTEnvironment, V, TP extends 'set' | 'update'> = undef
   : LegalDefinedValue<E, V, TP>;
 
 type LegalDefinedValue<E extends FTEnvironment, V, TP extends 'set' | 'update'> = V extends FirestoreTimestamp<E>
-  ? FTFieldValueServerTimestamp | FirestoreTimestamp<E>
+  ? FTFieldValueServerTimestamp | FirestoreTimestamp<E> | Date
   : V extends FirestoreGeoPoint<E>
   ? FirestoreGeoPoint<E>
   : V extends FirestoreDocumentReference<E, infer T>
