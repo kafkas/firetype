@@ -10,8 +10,7 @@
     "firebase",
     "TypeScript",
     "typescript",
-    "cloud firestore",
-    "cloud functions"
+    "cloud firestore"
   ],
   "author": "Anar Kafkas <anarkafkas@gmail.com>",
   "homepage": "https://github.com/kafkas/firetype/tree/main/packages/client",
