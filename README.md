@@ -17,6 +17,6 @@ Firetype comprises 2 packages, [Firetype Client](packages/client) and [Firetype 
 
 ## Docs
 
-### [Firetype Client Docs](packages/client)
+### [Firetype Client](packages/client)
 
-### [Firetype Server Docs](packages/server)
+### [Firetype Server](packages/server)
