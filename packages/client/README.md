@@ -116,14 +116,13 @@ const describer: FTFirestoreDescriber<FirestoreModel> = {
           from: email.from,
           to: email.to,
           subject: email.subject ?? 'Some Topic',
-          sentAt: email.sentAt,
+          // `sentAt` is readonly for clients so we'll get a TS error if we add it here
         }),
         setMerge: email =>
           removeUndefinedFields({
             from: email.from,
             to: email.to,
             subject: email.subject,
-            sentAt: email.sentAt,
           }),
       },
     },
