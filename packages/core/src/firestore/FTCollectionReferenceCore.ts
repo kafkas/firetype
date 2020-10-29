@@ -26,15 +26,15 @@ export abstract class FTCollectionReferenceCore<E extends FTEnvironment, CM exte
 
   /**
    * Applies one of the 2 converters provided in the describer to this collection.
-   * @param setType Either `"set"` or `"setMerge"`.
+   * @param toFirestoreConverterType Either `"set"` or `"setMerge"`.
    * @returns A `CollectionReference` to which a specified converter is applied.
    */
-  public coreWithConverter<ST extends SetType>(setType: ST) {
+  public coreWithConverter<ST extends SetType>(toFirestoreConverterType: ST) {
     // We need this assertion to prevent "Incompatible call signature" error.
     // See https://github.com/microsoft/TypeScript/issues/7294
     return ((this.core.withConverter as unknown) as WithConverter<E, CM, ST>)({
       fromFirestore: this.describer.converter.fromFirestore,
-      toFirestore: this.describer.converter.toFirestore[setType],
+      toFirestore: this.describer.converter.toFirestore[toFirestoreConverterType],
     } as ST extends 'set' ? SetConverter<E, CM> : SetMergeConverter<E, CM>);
   }
 

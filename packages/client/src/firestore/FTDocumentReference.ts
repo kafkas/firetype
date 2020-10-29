@@ -6,6 +6,9 @@ export class FTDocumentReference<CM extends FTCollectionModel> extends FTDocumen
     super();
   }
 
+  /**
+   * @throws {Error} If the subcollection doesn't exist according to the schema.
+   */
   public collection<K extends keyof CM['sub']>(key: K) {
     if (!DescriberUtils.hasSubcollection(this.collectionRef.describer)) {
       throw new Error('Subcollection does not exist according to the describer.');
