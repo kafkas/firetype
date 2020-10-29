@@ -20,3 +20,7 @@ Firetype comprises 2 packages, [Firetype Client](packages/client) and [Firetype 
 ### [Firetype Client](packages/client)
 
 ### [Firetype Server](packages/server)
+
+## License
+
+This project is made available under the MIT License.
