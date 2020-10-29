@@ -279,6 +279,8 @@ Firestore.collection('emails')
 
 ## [API Reference](https://github.com/kafkas/firetype/wiki/Client-API-Reference)
 
+You can find the full API reference for `@firetype/client` [here](https://github.com/kafkas/firetype/wiki/Client-API-Reference).
+
 ## License
 
 This project is made available under the MIT License.

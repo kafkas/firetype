@@ -15,7 +15,7 @@ Firetype comprises 2 packages, [Firetype Client](packages/client) and [Firetype 
         <img src="https://img.shields.io/github/last-commit/kafkas/firetype" /></a>
 </p>
 
-## Docs
+## Packages
 
 ### [Firetype Client](packages/client)
 

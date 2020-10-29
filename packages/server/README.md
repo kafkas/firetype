@@ -313,6 +313,8 @@ const onCreateTrigger = Functions.firestore
 
 ## [API Reference](https://github.com/kafkas/firetype/wiki/Server-API-Reference)
 
+You can find the full API reference for `@firetype/server` [here](https://github.com/kafkas/firetype/wiki/Server-API-Reference).
+
 ## License
 
 This project is made available under the MIT License.
