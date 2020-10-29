@@ -1,6 +1,6 @@
 {
   "name": "@firetype/server",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Firetype Server library for Firebase Admin and Cloud Functions SDKs",
   "keywords": [
     "Firetype",
@@ -55,6 +55,6 @@
     "typescript": "~4.0.3"
   },
   "dependencies": {
-    "@firetype/core": "^0.1.2"
+    "@firetype/core": "^0.1.3"
   }
 }
