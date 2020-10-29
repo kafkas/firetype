@@ -311,4 +311,4 @@ const onCreateTrigger = Functions.firestore
   });
 ```
 
-## [API Reference](https://github.com/kafkas/firetype/wiki/Client-API-Reference)
+## [API Reference](https://github.com/kafkas/firetype/wiki/Server-API-Reference)
