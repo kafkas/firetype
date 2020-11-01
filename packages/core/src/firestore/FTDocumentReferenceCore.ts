@@ -17,7 +17,7 @@ export abstract class FTDocumentReferenceCore<E extends FTEnvironment, CM extend
       : firestoreAdmin.DocumentReference;
   }
 
-  private coreWithConverter<ST extends 'set' | 'setMerge'>(setType: ST) {
+  public coreWithConverter<ST extends 'set' | 'setMerge'>(setType: ST) {
     return this.collectionRef.coreWithConverter(setType).doc(this.uid) as E extends 'client'
       ? firestoreClient.DocumentReference<FTModel.Processed<CM>>
       : firestoreAdmin.DocumentReference<FTModel.Processed<CM>>;
