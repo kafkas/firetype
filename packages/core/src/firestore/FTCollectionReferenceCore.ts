@@ -61,4 +61,12 @@ export abstract class FTCollectionReferenceCore<E extends FTEnvironment, CM exte
       ? firestoreClient.Query<FTModel.Processed<CM>>
       : FirebaseFirestore.Query<FTModel.Processed<CM>>;
   }
+
+  public add(data: FTModel.Processed<CM>) {
+    return this.coreWithConverter('set').add(data) as Promise<
+      E extends 'client'
+        ? firestoreClient.DocumentReference<FTModel.Processed<CM>>
+        : FirebaseFirestore.DocumentReference<FTModel.Processed<CM>>
+    >;
+  }
 }
