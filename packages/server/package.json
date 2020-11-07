@@ -36,11 +36,12 @@
     "url": "git+https://github.com/kafkas/firetype.git"
   },
   "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1",
     "compile": "npm run compile:esm && npm run compile:cjs && npm run compile:esnext",
     "compile:esm": "tsc -p ./src/tsconfig.build.json",
     "compile:cjs": "tsc -p ./src/tsconfig.build.json -m commonjs --outDir lib/cjs",
-    "compile:esnext": "tsc -p ./src/tsconfig.build.json -t esnext --outDir lib/esnext"
+    "compile:esnext": "tsc -p ./src/tsconfig.build.json -t esnext --outDir lib/esnext",
+    "compile:tests": "tsc -p ./__tests__/tsconfig.test.json --outDir mama",
+    "test": "mocha --timeout 10000 -r ts-node/register --reporter spec test/online.test.ts --exit"
   },
   "bugs": {
     "url": "https://github.com/kafkas/firetype/issues"
