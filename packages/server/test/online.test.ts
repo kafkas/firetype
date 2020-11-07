@@ -1,4 +1,4 @@
-// import * as admin from 'firebase-admin';
+import './_init';
 import { assert } from 'chai';
 import { describe, before } from 'mocha';
 // import { Firestore as _Firestore } from './services/firestore';
@@ -12,11 +12,15 @@ describe('Firestore', function () {
     // ({ Firestore } = require('./services/firestore'));
   });
 
-  after(function () {
-    // test.cleanup();
-  });
-
   describe('update() method', function () {
+    before(async function () {
+      //
+    });
+
+    after(async function () {
+      //
+    });
+
     it('should delete field if delete sentinel is passed', async function () {
       assert(true);
     });
