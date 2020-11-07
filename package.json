@@ -19,8 +19,8 @@
     "clean": "lerna run --parallel clean",
     "compile": "lerna run compile",
     "lint": "npx eslint packages/*/src --ext .js,.jsx,.ts,.tsx",
-    "format": "prettier --write \"./packages/**/src/**/*.{ts,tsx,json}\"",
-    "format-check": "prettier --check \"./packages/**/src/**/*.{ts,tsx,json}\"",
+    "format": "prettier --write \"./packages/**/{src,test}/**/*.{ts,tsx,json}\"",
+    "format-check": "prettier --check \"./packages/**/{src,test}/**/*.{ts,tsx,json}\"",
     "test": "npm run test:server",
     "test:server": "lerna run --scope=@firetype/server test"
   }
