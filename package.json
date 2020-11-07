@@ -20,6 +20,8 @@
     "compile": "lerna run compile",
     "lint": "npx eslint packages/*/src --ext .js,.jsx,.ts,.tsx",
     "format": "prettier --write \"./packages/**/src/**/*.{ts,tsx,json}\"",
-    "format-check": "prettier --check \"./packages/**/src/**/*.{ts,tsx,json}\""
+    "format-check": "prettier --check \"./packages/**/src/**/*.{ts,tsx,json}\"",
+    "test": "npm run test:server",
+    "test:server": "lerna run --scope=@firetype/server test"
   }
 }
