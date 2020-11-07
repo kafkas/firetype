@@ -34,8 +34,15 @@
     "url": "https://github.com/kafkas/firetype/issues"
   },
   "devDependencies": {
+    "@types/chai": "^4.2.14",
+    "@types/mocha": "^8.0.3",
+    "@types/sinon": "^9.0.8",
+    "chai": "^4.2.0",
     "firebase": "^7.24.0",
     "firebase-admin": "^9.2.0",
+    "mocha": "^8.2.1",
+    "sinon": "^9.2.1",
+    "ts-node": "^9.0.0",
     "typescript": "~4.0.3"
   },
   "peerDependencies": {
