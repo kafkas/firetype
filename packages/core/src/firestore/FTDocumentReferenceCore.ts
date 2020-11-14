@@ -23,6 +23,14 @@ export abstract class FTDocumentReferenceCore<E extends FTEnvironment, CM extend
       : firestoreAdmin.DocumentReference<FTModel.Processed<CM>>;
   }
 
+  public get() {
+    return this.coreWithConverter('set').get() as Promise<
+      E extends 'client'
+        ? firestoreClient.DocumentSnapshot<FTModel.Processed<CM>>
+        : firestoreAdmin.DocumentSnapshot<FTModel.Processed<CM>>
+    >;
+  }
+
   /**
    * This is equivalent to `set(data)`.
    */
