@@ -1,6 +1,6 @@
 {
   "name": "@firetype/client",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Firetype Client library for Firebase JS SDK",
   "keywords": [
     "Firetype",
@@ -58,6 +58,6 @@
     "firebase": "^7.24.0"
   },
   "dependencies": {
-    "@firetype/core": "^0.1.5"
+    "@firetype/core": "^0.1.6"
   }
 }
