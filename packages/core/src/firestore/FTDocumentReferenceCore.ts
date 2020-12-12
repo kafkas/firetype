@@ -1,6 +1,5 @@
-import type { firestore as firestoreAdmin } from 'firebase-admin';
-import type { firestore as firestoreClient } from 'firebase';
 import type { FTEnvironment, FTCollectionModel, FTModel } from '..';
+import type { DocumentSnapshot, DocumentReference, WriteResult } from './types';
 import type { FTCollectionReferenceCore } from '.';
 
 export abstract class FTDocumentReferenceCore<E extends FTEnvironment, CM extends FTCollectionModel> {
@@ -12,30 +11,22 @@ export abstract class FTDocumentReferenceCore<E extends FTEnvironment, CM extend
   protected abstract uid: string;
 
   public get core() {
-    return this.collectionRef.core.doc(this.uid) as E extends 'client'
-      ? firestoreClient.DocumentReference
-      : firestoreAdmin.DocumentReference;
+    return this.collectionRef.core.doc(this.uid) as DocumentReference<E>;
   }
 
   public coreWithConverter<ST extends 'set' | 'setMerge'>(setType: ST) {
-    return this.collectionRef.coreWithConverter(setType).doc(this.uid) as E extends 'client'
-      ? firestoreClient.DocumentReference<FTModel.Processed<CM>>
-      : firestoreAdmin.DocumentReference<FTModel.Processed<CM>>;
+    return this.collectionRef.coreWithConverter(setType).doc(this.uid) as DocumentReference<E, FTModel.Processed<CM>>;
   }
 
   public get() {
-    return this.coreWithConverter('set').get() as Promise<
-      E extends 'client'
-        ? firestoreClient.DocumentSnapshot<FTModel.Processed<CM>>
-        : firestoreAdmin.DocumentSnapshot<FTModel.Processed<CM>>
-    >;
+    return this.coreWithConverter('set').get() as Promise<DocumentSnapshot<E, FTModel.Processed<CM>>>;
   }
 
   /**
    * This is equivalent to `set(data)`.
    */
   public set(data: FTModel.Processed<CM>) {
-    return this.coreWithConverter('set').set(data) as Promise<E extends 'client' ? void : firestoreAdmin.WriteResult>;
+    return this.coreWithConverter('set').set(data) as Promise<WriteResult<E>>;
   }
 
   /**
@@ -44,13 +35,13 @@ export abstract class FTDocumentReferenceCore<E extends FTEnvironment, CM extend
   public setMerge(data: Partial<FTModel.Processed<CM>>) {
     return this.coreWithConverter('setMerge').set(data, {
       merge: true,
-    }) as Promise<E extends 'client' ? void : firestoreAdmin.WriteResult>;
+    }) as Promise<WriteResult<E>>;
   }
 
   /**
    * This is equivalent to `update(data)`.
    */
   public update(data: FTModel.LegalOutgoingUpdateData<E, CM>) {
-    return this.core.update(data) as Promise<E extends 'client' ? void : firestoreAdmin.WriteResult>;
+    return this.core.update(data) as Promise<WriteResult<E>>;
   }
 }

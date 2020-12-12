@@ -1,3 +1,4 @@
+import type firebase from 'firebase/app';
 import { FTCollectionReferenceCore, FTCollectionModel } from '@firetype/core';
 import type { FTCollectionDescriber } from '../FTCollectionDescriber';
 import { FTDocumentReference } from '.';

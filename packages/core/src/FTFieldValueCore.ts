@@ -1,6 +1,5 @@
-import type { firestore as firestoreAdmin } from 'firebase-admin';
-import type { firestore as firestoreClient } from 'firebase';
 import type { FTEnvironment } from '.';
+import type { FieldValueCore } from './firestore/types';
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
@@ -12,9 +11,7 @@ export interface FTFieldValueArrayRemove<_> {}
 export interface FTFieldValueArrayUnion<_> {}
 
 export abstract class FTFieldValueCore<E extends FTEnvironment> {
-  public abstract readonly core: E extends 'client'
-    ? typeof firestoreClient.FieldValue
-    : typeof firestoreAdmin.FieldValue;
+  public abstract readonly core: FieldValueCore<E>;
 
   public increment(n: number) {
     return this.core.increment(n) as FTFieldValueIncrement;

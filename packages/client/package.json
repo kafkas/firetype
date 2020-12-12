@@ -48,14 +48,14 @@
     "@types/mocha": "^8.0.3",
     "@types/sinon": "^9.0.8",
     "chai": "^4.2.0",
-    "firebase": "^7.24.0",
+    "firebase": "^8.2.0",
     "mocha": "^8.2.1",
     "sinon": "^9.2.1",
     "ts-node": "^9.0.0",
     "typescript": "~4.0.3"
   },
   "peerDependencies": {
-    "firebase": "^7.24.0"
+    "firebase": "^8.2.0"
   },
   "dependencies": {
     "@firetype/core": "^0.1.6"

@@ -1,5 +1,3 @@
-import type { firestore as firestoreAdmin } from 'firebase-admin';
-import type { firestore as firestoreClient } from 'firebase';
 import type {
   FTCollectionModel,
   FTCollectionDescriberCore,
@@ -8,20 +6,16 @@ import type {
   SetConverter,
   SetMergeConverter,
 } from '..';
+import type { CollectionReference, DocumentReference, WhereFilterOp, Query } from './types';
 
 type SetType = 'set' | 'setMerge';
 
 type WithConverter<E extends FTEnvironment, CM extends FTCollectionModel, TP extends SetType> = (
   converter: TP extends 'set' ? SetConverter<E, CM> : SetMergeConverter<E, CM>
-) => E extends 'client'
-  ? firestoreClient.CollectionReference<FTModel.Processed<CM>>
-  : firestoreAdmin.CollectionReference<FTModel.Processed<CM>>;
+) => CollectionReference<E, FTModel.Processed<CM>>;
 
 export abstract class FTCollectionReferenceCore<E extends FTEnvironment, CM extends FTCollectionModel> {
-  public abstract readonly core: E extends 'client'
-    ? firestoreClient.CollectionReference
-    : firestoreAdmin.CollectionReference;
-
+  public abstract readonly core: CollectionReference<E>;
   public abstract readonly describer: FTCollectionDescriberCore<E, CM>;
 
   /**
@@ -43,10 +37,7 @@ export abstract class FTCollectionReferenceCore<E extends FTEnvironment, CM exte
    * query fields at the root level. If you need to use `FieldPath` or some other complex
    * query with nested fields, use a raw query instead.
    */
-  public where<
-    F extends keyof FTModel.Raw<CM>,
-    O extends E extends 'client' ? firestoreClient.WhereFilterOp : FirebaseFirestore.WhereFilterOp
-  >(
+  public where<F extends keyof FTModel.Raw<CM>, O extends WhereFilterOp<E>>(
     field: F,
     opStr: O,
     value: O extends 'array-contains'
@@ -57,16 +48,10 @@ export abstract class FTCollectionReferenceCore<E extends FTEnvironment, CM exte
       ? FTModel.Raw<CM>[F][]
       : FTModel.Raw<CM>[F]
   ) {
-    return this.coreWithConverter('set').where(<string>field, opStr, value) as E extends 'client'
-      ? firestoreClient.Query<FTModel.Processed<CM>>
-      : FirebaseFirestore.Query<FTModel.Processed<CM>>;
+    return this.coreWithConverter('set').where(<string>field, opStr, value) as Query<E, FTModel.Processed<CM>>;
   }
 
   public add(data: FTModel.Processed<CM>) {
-    return this.coreWithConverter('set').add(data) as Promise<
-      E extends 'client'
-        ? firestoreClient.DocumentReference<FTModel.Processed<CM>>
-        : FirebaseFirestore.DocumentReference<FTModel.Processed<CM>>
-    >;
+    return this.coreWithConverter('set').add(data) as Promise<DocumentReference<E, FTModel.Processed<CM>>>;
   }
 }

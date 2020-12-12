@@ -1,8 +1,10 @@
 import { FTFieldValueCore } from '@firetype/core';
-import { firestore } from 'firebase';
+import firebase from 'firebase/app';
+
+const { firestore } = firebase;
 
 class FTFieldValueClient extends FTFieldValueCore<'client'> {
-  public readonly core: typeof firestore.FieldValue;
+  public readonly core: typeof firebase.firestore.FieldValue;
 
   constructor() {
     super();

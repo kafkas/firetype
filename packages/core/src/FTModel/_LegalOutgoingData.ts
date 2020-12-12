@@ -1,5 +1,3 @@
-import type { firestore as firestoreClient } from 'firebase';
-import type { firestore as firestoreAdmin } from 'firebase-admin';
 import type {
   FTEnvironment,
   FTCollectionModel,
@@ -11,18 +9,7 @@ import type {
   FTFieldValueIncrement,
   FTFieldValueDecrement,
 } from '..';
-
-type FirestoreTimestamp<E extends FTEnvironment> = E extends 'client'
-  ? firestoreClient.Timestamp
-  : firestoreAdmin.Timestamp;
-
-type FirestoreGeoPoint<E extends FTEnvironment> = E extends 'client'
-  ? firestoreClient.GeoPoint
-  : firestoreAdmin.GeoPoint;
-
-type FirestoreDocumentReference<E extends FTEnvironment, T> = E extends 'client'
-  ? firestoreClient.DocumentReference<T>
-  : firestoreAdmin.DocumentReference<T>;
+import { DocumentReference, Timestamp, GeoPoint } from '../firestore/types';
 
 /**
  * Derives the shape of the raw object that can be used in and `set()`
@@ -56,12 +43,12 @@ type LegalValue<E extends FTEnvironment, V, TP extends 'set' | 'update'> = undef
     : LegalDefinedValue<E, V, TP>
   : LegalDefinedValue<E, V, TP>;
 
-type LegalDefinedValue<E extends FTEnvironment, V, TP extends 'set' | 'update'> = V extends FirestoreTimestamp<E>
-  ? FTFieldValueServerTimestamp | FirestoreTimestamp<E> | Date
-  : V extends FirestoreGeoPoint<E>
-  ? FirestoreGeoPoint<E>
-  : V extends FirestoreDocumentReference<E, infer T>
-  ? FirestoreDocumentReference<E, T>
+type LegalDefinedValue<E extends FTEnvironment, V, TP extends 'set' | 'update'> = V extends Timestamp<E>
+  ? FTFieldValueServerTimestamp | Timestamp<E> | Date
+  : V extends GeoPoint<E>
+  ? GeoPoint<E>
+  : V extends DocumentReference<E, infer T>
+  ? DocumentReference<E, T>
   : V extends number
   ? FTFieldValueIncrement | FTFieldValueDecrement | number
   : V extends Array<infer T>
