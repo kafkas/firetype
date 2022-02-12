@@ -1,5 +1,7 @@
 # Firetype Server
 
+**Warning: This package has been discontinued. Although it does its job fairly well, its API is not well thought out so I have decided not to work on it anymore.**
+
 Firetype is a lightweight TypeScript library that lets you strictly type your Firebase architecture.
 
 Firetype Server wraps the Firebase [Admin](https://github.com/firebase/firebase-admin-node) and [Cloud Functions](https://github.com/firebase/firebase-functions) SDKs in a way that lets you provide a set of types describing your data so you can prevent bugs, errors and crashes at compile time. It remembers the "schema" that you feed to it and stops you from writing bad code. This, combined with the ease with which it lets you bring changes to your codebase, provides a great developer experience.
